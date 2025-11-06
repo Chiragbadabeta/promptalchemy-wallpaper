@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptAlchemy Wallpaper - Futuristic HD Wallpapers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #00d4ff;
+    --secondary-color: #9d4edd;
+    --accent-color: #ff006e;
+    --bg-dark: #0a0a0f;
+    --bg-darker: #050508;
+    --text-light: #ffffff;
+    --text-gray: #a0a0a0;
+    --card-bg: rgba(20, 20, 30, 0.8);
+    --glow-color: rgba(0, 212, 255, 0.5);
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Animated Background */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 100%);
+}
+
+.grid-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(50px); }
+}
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px var(--glow-color);
+}
+
+.logo-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--glow-color);
+}
+
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 900px;
+    z-index: 1;
+}
+
+.hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.glitch {
+    position: relative;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { filter: drop-shadow(0 0 20px var(--glow-color)); }
+    50% { filter: drop-shadow(0 0 40px var(--glow-color)); }
+}
+
+.hero-subtitle {
+    font-size: 2.5rem;
+    color: var(--text-gray);
+    letter-spacing: 5px;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px var(--glow-color);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.hero-stats {
+    display: flex;
+    gap: 4rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    text-shadow: 0 0 20px var(--glow-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Search Section */
+.search-section {
+    padding: 4rem 2rem;
+    background: rgba(10, 10, 15, 0.5);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.search-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background: var(--card-bg);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    color: var(--text-light);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.search-btn {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    border: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    box-shadow: 0 0 20px var(--glow-color);
+    transform: translateY(-2px);
+}
+
+.filter-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    padding: 0.8rem 1.5rem;
+    background: var(--card-bg);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    color: var(--text-light);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
+/* Section Titles */
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-light);
+}
+
+.highlight {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Categories Section */
+.categories-section {
+    padding: 6rem 2rem;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.category-card {
+    position: relative;
+    height: 250px;
+    background: var(--card-bg);
+    border: 2px solid rgba(0, 212, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(157, 78, 221, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 40px var(--glow-color);
+}
+
+.category-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+}
+
+.category-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.category-count {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+/* Gallery Section */
+.gallery-section {
+    padding: 6rem 2rem;
+    background: rgba(10, 10, 15, 0.5);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.wallpaper-card {
+    position: relative;
+    height: 400px;
+    background: var(--card-bg);
+    border: 2px solid rgba(0, 212, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.wallpaper-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 40px var(--glow-color);
+}
+
+.wallpaper-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.wallpaper-card:hover .wallpaper-image {
+    transform: scale(1.1);
+}
+
+.wallpaper-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.wallpaper-card:hover .wallpaper-overlay {
+    transform: translateY(0);
+}
+
+.wallpaper-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.wallpaper-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.wallpaper-category,
+.wallpaper-resolution {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+}
+
+.download-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    border: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.load-more-container {
+    text-align: center;
+}
+
+/* Admin Section */
+.admin-section {
+    padding: 6rem 2rem;
+}
+
+.admin-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.admin-login,
+.admin-panel {
+    background: var(--card-bg);
+    border: 2px solid rgba(0, 212, 255, 0.2);
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.admin-login h3,
+.admin-panel h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.admin-input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(10, 10, 15, 0.8);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    color: var(--text-light);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.admin-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.admin-message.success {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    color: #00ff00;
+}
+
+.admin-message.error {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    color: #ff0000;
+}
+
+/* Footer */
+.footer {
+    background: var(--bg-darker);
+    border-top: 1px solid rgba(0, 212, 255, 0.2);
+    padding: 4rem 2rem 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.footer-subtitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: var(--text-gray);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    padding: 0.5rem 1rem;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 212, 255, 0.1);
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    background: var(--card-bg);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 0 50px var(--glow-color);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--accent-color);
+}
+
+#modalImage {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.modal-info {
+    text-align: center;
+}
+
+#modalTitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+#modalResolution {
+    color: var(--text-gray);
+    margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .hero-stats {
+        gap: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-20px) translateX(10px); }
+    50% { transform: translateY(-40px) translateX(-10px); }
+    75% { transform: translateY(-20px) translateX(5px); }
+}
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="grid-overlay"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">PromptAlchemy</span>
+                <span class="logo-subtitle">Wallpaper</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#categories" class="nav-link">Categories</a></li>
+                <li><a href="#admin" class="nav-link admin-link">Admin</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="glitch" data-text="PromptAlchemy">PromptAlchemy</span>
+                <span class="hero-subtitle">Wallpaper</span>
+            </h1>
+            <p class="hero-description">Immerse yourself in a curated collection of futuristic, high-quality wallpapers</p>
+            <div class="hero-buttons">
+                <a href="#gallery" class="btn btn-primary">Explore Gallery</a>
+                <a href="#categories" class="btn btn-secondary">Browse Categories</a>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number" data-target="500">0</span>
+                <span class="stat-label">Wallpapers</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="5">0</span>
+                <span class="stat-label">Categories</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="4">0</span>
+                <span class="stat-label">K+ Downloads</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search & Filter Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search wallpapers...">
+                <button class="search-btn">Search</button>
+            </div>
+            <div class="filter-container">
+                <select id="categoryFilter" class="filter-select">
+                    <option value="all">All Categories</option>
+                    <option value="cyberpunk">Cyberpunk</option>
+                    <option value="abstract">Abstract</option>
+                    <option value="minimal">Minimal</option>
+                    <option value="nature">Nature</option>
+                    <option value="luxury">Luxury</option>
+                </select>
+                <select id="resolutionFilter" class="filter-select">
+                    <option value="all">All Resolutions</option>
+                    <option value="1920x1080">1920x1080</option>
+                    <option value="2560x1440">2560x1440</option>
+                    <option value="3840x2160">3840x2160 (4K)</option>
+                    <option value="mobile">Mobile</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Explore <span class="highlight">Categories</span></h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="cyberpunk">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Cyberpunk</h3>
+                        <p class="category-count">120+ wallpapers</p>
+                    </div>
+                </div>
+                <div class="category-card" data-category="abstract">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Abstract</h3>
+                        <p class="category-count">95+ wallpapers</p>
+                    </div>
+                </div>
+                <div class="category-card" data-category="minimal">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Minimal</h3>
+                        <p class="category-count">80+ wallpapers</p>
+                    </div>
+                </div>
+                <div class="category-card" data-category="nature">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Nature</h3>
+                        <p class="category-count">110+ wallpapers</p>
+                    </div>
+                </div>
+                <div class="category-card" data-category="luxury">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Luxury</h3>
+                        <p class="category-count">95+ wallpapers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Featured <span class="highlight">Wallpapers</span></h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Wallpapers will be dynamically loaded here -->
+            </div>
+            <div class="load-more-container">
+                <button class="btn btn-primary" id="loadMoreBtn">Load More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel -->
+    <section id="admin" class="admin-section">
+        <div class="container">
+            <h2 class="section-title">Admin <span class="highlight">Panel</span></h2>
+            <div class="admin-container">
+                <div class="admin-login" id="adminLogin">
+                    <h3>Admin Access</h3>
+                    <input type="password" id="adminPassword" class="admin-input" placeholder="Enter admin password">
+                    <button class="btn btn-primary" id="adminLoginBtn">Login</button>
+                </div>
+                <div class="admin-panel" id="adminPanel" style="display: none;">
+                    <h3>Upload Wallpaper</h3>
+                    <form id="uploadForm" class="upload-form">
+                        <input type="text" id="wallpaperTitle" class="admin-input" placeholder="Wallpaper Title" required>
+                        <select id="wallpaperCategory" class="admin-input" required>
+                            <option value="">Select Category</option>
+                            <option value="cyberpunk">Cyberpunk</option>
+                            <option value="abstract">Abstract</option>
+                            <option value="minimal">Minimal</option>
+                            <option value="nature">Nature</option>
+                            <option value="luxury">Luxury</option>
+                        </select>
+                        <input type="text" id="wallpaperResolution" class="admin-input" placeholder="Resolution (e.g., 1920x1080)" required>
+                        <input type="file" id="wallpaperFile" class="admin-input" accept="image/*" required>
+                        <button type="submit" class="btn btn-primary">Upload Wallpaper</button>
+                    </form>
+                    <div class="admin-message" id="adminMessage"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">PromptAlchemy Wallpaper</h3>
+                    <p class="footer-description">Your destination for premium futuristic wallpapers</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#admin">Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Discord</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Contact</h4>
+                    <p>contact@promptalchemy.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PromptAlchemy Wallpaper. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Wallpaper Preview -->
+    <div class="modal" id="wallpaperModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <img src="" alt="" id="modalImage">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalResolution"></p>
+                <button class="btn btn-primary" id="modalDownloadBtn">Download</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// Sample wallpaper data
+let wallpapers = [
+    {
+        id: 1,
+        title: 'Neon City',
+        category: 'cyberpunk',
+        resolution: '3840x2160',
+        image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800',
+        downloadUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=3840'
+    },
+    {
+        id: 2,
+        title: 'Abstract Flow',
+        category: 'abstract',
+        resolution: '2560x1440',
+        image: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800',
+        downloadUrl: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=2560'
+    },
+    {
+        id: 3,
+        title: 'Minimal Gradient',
+        category: 'minimal',
+        resolution: '1920x1080',
+        image: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=800',
+        downloadUrl: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920'
+    },
+    {
+        id: 4,
+        title: 'Mountain Vista',
+        category: 'nature',
+        resolution: '3840x2160',
+        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+        downloadUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=3840'
+    },
+    {
+        id: 5,
+        title: 'Gold Luxury',
+        category: 'luxury',
+        resolution: '2560x1440',
+        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800',
+        downloadUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=2560'
+    },
+    {
+        id: 6,
+        title: 'Cyber Grid',
+        category: 'cyberpunk',
+        resolution: '3840x2160',
+        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
+        downloadUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=3840'
+    },
+    {
+        id: 7,
+        title: 'Fluid Art',
+        category: 'abstract',
+        resolution: '2560x1440',
+        image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800',
+        downloadUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=2560'
+    },
+    {
+        id: 8,
+        title: 'Clean Lines',
+        category: 'minimal',
+        resolution: '1920x1080',
+        image: 'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=800',
+        downloadUrl: 'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=1920'
+    },
+    {
+        id: 9,
+        title: 'Forest Path',
+        category: 'nature',
+        resolution: '3840x2160',
+        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
+        downloadUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=3840'
+    }
+];
+
+let displayedWallpapers = 6;
+let currentFilter = { category: 'all', resolution: 'all', search: '' };
+
+// Initialize particles
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = Math.random() * 3 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.background = 'rgba(0, 212, 255, 0.5)';
+        particle.style.borderRadius = '50%';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animation = `float ${Math.random() * 10 + 5}s linear infinite`;
+        particle.style.boxShadow = '0 0 10px rgba(0, 212, 255, 0.8)';
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Animate stats counter
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                stat.textContent = target;
+                clearInterval(timer);
+            } else {
+                stat.textContent = Math.floor(current);
+            }
+        }, 16);
+    });
+}
+
+// Render wallpapers
+function renderWallpapers() {
+    const galleryGrid = document.getElementById('galleryGrid');
+    galleryGrid.innerHTML = '';
+    
+    let filteredWallpapers = wallpapers.filter(wallpaper => {
+        const categoryMatch = currentFilter.category === 'all' || wallpaper.category === currentFilter.category;
+        const resolutionMatch = currentFilter.resolution === 'all' || wallpaper.resolution === currentFilter.resolution;
+        const searchMatch = currentFilter.search === '' || 
+            wallpaper.title.toLowerCase().includes(currentFilter.search.toLowerCase()) ||
+            wallpaper.category.toLowerCase().includes(currentFilter.search.toLowerCase());
+        
+        return categoryMatch && resolutionMatch && searchMatch;
+    });
+    
+    const wallpapersToShow = filteredWallpapers.slice(0, displayedWallpapers);
+    
+    wallpapersToShow.forEach(wallpaper => {
+        const card = document.createElement('div');
+        card.className = 'wallpaper-card';
+        card.innerHTML = `
+            <img src="${wallpaper.image}" alt="${wallpaper.title}" class="wallpaper-image">
+            <div class="wallpaper-overlay">
+                <h3 class="wallpaper-title">${wallpaper.title}</h3>
+                <div class="wallpaper-info">
+                    <span class="wallpaper-category">${wallpaper.category}</span>
+                    <span class="wallpaper-resolution">${wallpaper.resolution}</span>
+                </div>
+                <button class="download-btn" onclick="downloadWallpaper(${wallpaper.id})">Download</button>
+            </div>
+        `;
+        
+        card.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('download-btn')) {
+                openModal(wallpaper);
+            }
+        });
+        
+        galleryGrid.appendChild(card);
+    });
+    
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (displayedWallpapers >= filteredWallpapers.length) {
+        loadMoreBtn.style.display = 'none';
+    } else {
+        loadMoreBtn.style.display = 'inline-block';
+    }
+}
+
+// Download wallpaper
+function downloadWallpaper(id) {
+    const wallpaper = wallpapers.find(w => w.id === id);
+    if (wallpaper) {
+        const link = document.createElement('a');
+        link.href = wallpaper.downloadUrl;
+        link.download = `${wallpaper.title.replace(/\s+/g, '-')}.jpg`;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+// Modal functions
+function openModal(wallpaper) {
+    const modal = document.getElementById('wallpaperModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalResolution = document.getElementById('modalResolution');
+    const modalDownloadBtn = document.getElementById('modalDownloadBtn');
+    
+    modalImage.src = wallpaper.image;
+    modalTitle.textContent = wallpaper.title;
+    modalResolution.textContent = `${wallpaper.resolution} • ${wallpaper.category}`;
+    modalDownloadBtn.onclick = () => downloadWallpaper(wallpaper.id);
+    
+    modal.classList.add('active');
+}
+
+function closeModal() {
+    const modal = document.getElementById('wallpaperModal');
+    modal.classList.remove('active');
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    animateStats();
+    renderWallpapers();
+    
+    // Search
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.querySelector('.search-btn');
+    
+    searchBtn.addEventListener('click', () => {
+        currentFilter.search = searchInput.value;
+        displayedWallpapers = 6;
+        renderWallpapers();
+    });
+    
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            currentFilter.search = searchInput.value;
+            displayedWallpapers = 6;
+            renderWallpapers();
+        }
+    });
+    
+    // Filters
+    document.getElementById('categoryFilter').addEventListener('change', (e) => {
+        currentFilter.category = e.target.value;
+        displayedWallpapers = 6;
+        renderWallpapers();
+    });
+    
+    document.getElementById('resolutionFilter').addEventListener('change', (e) => {
+        currentFilter.resolution = e.target.value;
+        displayedWallpapers = 6;
+        renderWallpapers();
+    });
+    
+    // Load more
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+        displayedWallpapers += 6;
+        renderWallpapers();
+    });
+    
+    // Category cards
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const category = card.getAttribute('data-category');
+            document.getElementById('categoryFilter').value = category;
+            currentFilter.category = category;
+            displayedWallpapers = 6;
+            renderWallpapers();
+            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+    
+    // Modal close
+    document.querySelector('.modal-close').addEventListener('click', closeModal);
+    document.getElementById('wallpaperModal').addEventListener('click', (e) => {
+        if (e.target.id === 'wallpaperModal') {
+            closeModal();
+        }
+    });
+    
+    // Admin login
+    document.getElementById('adminLoginBtn').addEventListener('click', () => {
+        const password = document.getElementById('adminPassword').value;
+        if (password === 'admin123') {
+            document.getElementById('adminLogin').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+        } else {
+            alert('Incorrect password');
+        }
+    });
+    
+    // Admin upload
+    document.getElementById('uploadForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const title = document.getElementById('wallpaperTitle').value;
+        const category = document.getElementById('wallpaperCategory').value;
+        const resolution = document.getElementById('wallpaperResolution').value;
+        const file = document.getElementById('wallpaperFile').files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const newWallpaper = {
+                    id: wallpapers.length + 1,
+                    title: title,
+                    category: category,
+                    resolution: resolution,
+                    image: e.target.result,
+                    downloadUrl: e.target.result
+                };
+                
+                wallpapers.unshift(newWallpaper);
+                renderWallpapers();
+                
+                const message = document.getElementById('adminMessage');
+                message.textContent = 'Wallpaper uploaded successfully!';
+                message.className = 'admin-message success';
+                
+                document.getElementById('uploadForm').reset();
+                
+                setTimeout(() => {
+                    message.textContent = '';
+                    message.className = 'admin-message';
+                }, 3000);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    
+    // Mobile menu
+    document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+});
+
+// Scroll animations
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 100) {
+        navbar.style.background = 'rgba(10, 10, 15, 0.98)';
+    } else {
+        navbar.style.background = 'rgba(10, 10, 15, 0.95)';
+    }
+});
+    </script>
+</body>
+</html>
