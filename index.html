@@ -163,7 +163,7 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Hero Section */
+/* Hero Section - Enhanced */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -176,15 +176,15 @@ body {
 }
 
 .hero-content {
-    max-width: 900px;
+    max-width: 1000px;
     z-index: 1;
 }
 
 .hero-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 5rem;
+    font-size: 5.5rem;
     font-weight: 900;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -204,31 +204,42 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: var(--text-gray);
-    letter-spacing: 5px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
 }
 
 .hero-description {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--text-gray);
-    margin-bottom: 2rem;
-    max-width: 600px;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.8;
+}
+
+.hero-tagline {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    letter-spacing: 2px;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 3rem;
 }
 
 .btn {
-    padding: 1rem 2.5rem;
+    padding: 1.2rem 3rem;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -237,6 +248,7 @@ body {
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
+    border-radius: 5px;
 }
 
 .btn-primary {
@@ -264,7 +276,7 @@ body {
 
 .hero-stats {
     display: flex;
-    gap: 4rem;
+    gap: 5rem;
     margin-top: 4rem;
     flex-wrap: wrap;
     justify-content: center;
@@ -274,21 +286,78 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 1.5rem 2rem;
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
 }
 
 .stat-number {
     font-family: 'Orbitron', sans-serif;
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 900;
     color: var(--primary-color);
     text-shadow: 0 0 20px var(--glow-color);
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-gray);
     text-transform: uppercase;
     letter-spacing: 2px;
+    margin-top: 0.5rem;
+}
+
+/* Features Section - New */
+.features-section {
+    padding: 6rem 2rem;
+    background: rgba(10, 10, 15, 0.3);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border: 2px solid rgba(0, 212, 255, 0.2);
+    border-radius: 10px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 40px var(--glow-color);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.feature-description {
+    color: var(--text-gray);
+    line-height: 1.6;
 }
 
 /* Search Section */
@@ -553,13 +622,13 @@ body {
     text-align: center;
 }
 
-/* Admin Section */
+/* Admin Section - Enhanced */
 .admin-section {
     padding: 6rem 2rem;
 }
 
 .admin-container {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
 }
 
@@ -568,22 +637,22 @@ body {
     background: var(--card-bg);
     border: 2px solid rgba(0, 212, 255, 0.2);
     border-radius: 10px;
-    padding: 2rem;
+    padding: 3rem;
 }
 
 .admin-login h3,
 .admin-panel h3 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: var(--primary-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
 .admin-input {
     width: 100%;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
     background: rgba(10, 10, 15, 0.8);
     border: 2px solid rgba(0, 212, 255, 0.3);
     color: var(--text-light);
@@ -604,9 +673,72 @@ body {
     flex-direction: column;
 }
 
-.admin-message {
+.file-upload-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.file-upload-label {
+    display: block;
+    padding: 1.2rem;
+    background: rgba(10, 10, 15, 0.8);
+    border: 2px dashed rgba(0, 212, 255, 0.3);
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-gray);
+}
+
+.file-upload-label:hover {
+    border-color: var(--primary-color);
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.file-upload-label.has-file {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+#wallpaperFile {
+    display: none;
+}
+
+.image-preview {
     margin-top: 1rem;
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-color);
+    display: none;
+}
+
+.image-preview.show {
+    display: block;
+}
+
+.upload-instructions {
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 5px;
     padding: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+.upload-instructions ul {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.upload-instructions li {
+    margin-bottom: 0.3rem;
+}
+
+.admin-message {
+    margin-top: 1.5rem;
+    padding: 1.2rem;
     border-radius: 5px;
     text-align: center;
     font-weight: 600;
@@ -624,7 +756,7 @@ body {
     color: #ff0000;
 }
 
-/* Footer */
+/* Footer - Enhanced */
 .footer {
     background: var(--bg-darker);
     border-top: 1px solid rgba(0, 212, 255, 0.2);
@@ -680,24 +812,43 @@ body {
 
 .social-links {
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .social-link {
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.2rem;
     background: rgba(0, 212, 255, 0.1);
     border: 1px solid rgba(0, 212, 255, 0.3);
     color: var(--primary-color);
     text-decoration: none;
     border-radius: 5px;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .social-link:hover {
     background: var(--primary-color);
     color: var(--bg-dark);
     box-shadow: 0 0 15px var(--glow-color);
+    transform: translateX(5px);
+}
+
+.contact-info {
+    color: var(--text-gray);
+    line-height: 1.8;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--secondary-color);
 }
 
 .footer-bottom {
@@ -874,7 +1025,8 @@ body {
                 <span class="glitch" data-text="PromptAlchemy">PromptAlchemy</span>
                 <span class="hero-subtitle">Wallpaper</span>
             </h1>
-            <p class="hero-description">Immerse yourself in a curated collection of futuristic, high-quality wallpapers</p>
+            <p class="hero-tagline">✨ Transform Your Screen Into Art ✨</p>
+            <p class="hero-description">Immerse yourself in a curated collection of futuristic, high-quality wallpapers. From cyberpunk cityscapes to minimalist designs, discover the perfect backdrop for your digital world.</p>
             <div class="hero-buttons">
                 <a href="#gallery" class="btn btn-primary">Explore Gallery</a>
                 <a href="#categories" class="btn btn-secondary">Browse Categories</a>
@@ -892,6 +1044,30 @@ body {
             <div class="stat-item">
                 <span class="stat-number" data-target="4">0</span>
                 <span class="stat-label">K+ Downloads</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose <span class="highlight">PromptAlchemy</span></h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Premium Quality</h3>
+                    <p class="feature-description">Every wallpaper is carefully curated and optimized for stunning visual quality across all devices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Instant Downloads</h3>
+                    <p class="feature-description">One-click downloads with no registration required. Get your favorite wallpapers instantly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌈</div>
+                    <h3 class="feature-title">Diverse Collection</h3>
+                    <p class="feature-description">From cyberpunk to nature, abstract to luxury - find wallpapers that match your style.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -987,19 +1163,34 @@ body {
                 </div>
                 <div class="admin-panel" id="adminPanel" style="display: none;">
                     <h3>Upload Wallpaper</h3>
+                    <div class="upload-instructions">
+                        <strong>📋 Upload Guidelines:</strong>
+                        <ul>
+                            <li>Supported formats: JPG, PNG, WebP</li>
+                            <li>Recommended size: 1920x1080 or higher</li>
+                            <li>Images are stored permanently on GitHub</li>
+                            <li>Fill all fields before uploading</li>
+                        </ul>
+                    </div>
                     <form id="uploadForm" class="upload-form">
-                        <input type="text" id="wallpaperTitle" class="admin-input" placeholder="Wallpaper Title" required>
+                        <input type="text" id="wallpaperTitle" class="admin-input" placeholder="Wallpaper Title *" required>
                         <select id="wallpaperCategory" class="admin-input" required>
-                            <option value="">Select Category</option>
+                            <option value="">Select Category *</option>
                             <option value="cyberpunk">Cyberpunk</option>
                             <option value="abstract">Abstract</option>
                             <option value="minimal">Minimal</option>
                             <option value="nature">Nature</option>
                             <option value="luxury">Luxury</option>
                         </select>
-                        <input type="text" id="wallpaperResolution" class="admin-input" placeholder="Resolution (e.g., 1920x1080)" required>
-                        <input type="file" id="wallpaperFile" class="admin-input" accept="image/*" required>
-                        <button type="submit" class="btn btn-primary">Upload Wallpaper</button>
+                        <input type="text" id="wallpaperResolution" class="admin-input" placeholder="Resolution (e.g., 1920x1080) *" required>
+                        <div class="file-upload-wrapper">
+                            <label for="wallpaperFile" class="file-upload-label" id="fileLabel">
+                                📁 Click to select image file
+                            </label>
+                            <input type="file" id="wallpaperFile" accept="image/*" required>
+                            <img id="imagePreview" class="image-preview" alt="Preview">
+                        </div>
+                        <button type="submit" class="btn btn-primary">🚀 Upload Wallpaper</button>
                     </form>
                     <div class="admin-message" id="adminMessage"></div>
                 </div>
@@ -1013,7 +1204,7 @@ body {
             <div class="footer-content">
                 <div class="footer-section">
                     <h3 class="footer-title">PromptAlchemy Wallpaper</h3>
-                    <p class="footer-description">Your destination for premium futuristic wallpapers</p>
+                    <p class="footer-description">Your destination for premium futuristic wallpapers. Curated with passion, designed for perfection.</p>
                 </div>
                 <div class="footer-section">
                     <h4 class="footer-subtitle">Quick Links</h4>
@@ -1025,20 +1216,23 @@ body {
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4 class="footer-subtitle">Connect</h4>
+                    <h4 class="footer-subtitle">Connect With Us</h4>
                     <div class="social-links">
-                        <a href="#" class="social-link">Twitter</a>
-                        <a href="#" class="social-link">Instagram</a>
-                        <a href="#" class="social-link">Discord</a>
+                        <a href="https://instagram.com/promptalchemylab" target="_blank" class="social-link">
+                            📷 Instagram: @promptalchemylab
+                        </a>
                     </div>
                 </div>
                 <div class="footer-section">
                     <h4 class="footer-subtitle">Contact</h4>
-                    <p>contact@promptalchemy.com</p>
+                    <div class="contact-info">
+                        <p>📧 Email: <a href="mailto:c7134890@gmail.com">c7134890@gmail.com</a></p>
+                        <p>💬 We'd love to hear from you!</p>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 PromptAlchemy Wallpaper. All rights reserved.</p>
+                <p>&copy; 2024 PromptAlchemy Wallpaper. All rights reserved. | Made with ❤️ by PromptAlchemy Lab</p>
             </div>
         </div>
     </footer>
@@ -1057,6 +1251,15 @@ body {
     </div>
 
     <script>
+// GitHub Storage Configuration
+const GITHUB_CONFIG = {
+    owner: 'Chiragbadabeta',
+    repo: 'promptalchemy-wallpaper',
+    branch: 'main',
+    wallpapersPath: 'wallpapers',
+    dataFile: 'wallpapers-data.json'
+};
+
 // Sample wallpaper data
 let wallpapers = [
     {
@@ -1135,6 +1338,20 @@ let wallpapers = [
 
 let displayedWallpapers = 6;
 let currentFilter = { category: 'all', resolution: 'all', search: '' };
+
+// Load wallpapers from GitHub on page load
+async function loadWallpapersFromGitHub() {
+    try {
+        const response = await fetch(`https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.dataFile}`);
+        if (response.ok) {
+            const data = await response.json();
+            wallpapers = [...data, ...wallpapers]; // Merge with default wallpapers
+            renderWallpapers();
+        }
+    } catch (error) {
+        console.log('Using default wallpapers');
+    }
+}
 
 // Initialize particles
 function createParticles() {
@@ -1259,11 +1476,35 @@ function closeModal() {
     modal.classList.remove('active');
 }
 
+// File upload preview
+function setupFileUpload() {
+    const fileInput = document.getElementById('wallpaperFile');
+    const fileLabel = document.getElementById('fileLabel');
+    const imagePreview = document.getElementById('imagePreview');
+    
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            fileLabel.textContent = `✅ ${file.name}`;
+            fileLabel.classList.add('has-file');
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.src = e.target.result;
+                imagePreview.classList.add('show');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
     animateStats();
+    loadWallpapersFromGitHub();
     renderWallpapers();
+    setupFileUpload();
     
     // Search
     const searchInput = document.getElementById('searchInput');
@@ -1334,15 +1575,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Admin upload
-    document.getElementById('uploadForm').addEventListener('submit', (e) => {
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const title = document.getElementById('wallpaperTitle').value;
         const category = document.getElementById('wallpaperCategory').value;
         const resolution = document.getElementById('wallpaperResolution').value;
         const file = document.getElementById('wallpaperFile').files[0];
+        const message = document.getElementById('adminMessage');
         
         if (file) {
+            message.textContent = '⏳ Uploading wallpaper... Please wait.';
+            message.className = 'admin-message';
+            
             const reader = new FileReader();
             reader.onload = (e) => {
                 const newWallpaper = {
@@ -1351,26 +1596,45 @@ document.addEventListener('DOMContentLoaded', () => {
                     category: category,
                     resolution: resolution,
                     image: e.target.result,
-                    downloadUrl: e.target.result
+                    downloadUrl: e.target.result,
+                    uploadDate: new Date().toISOString()
                 };
                 
                 wallpapers.unshift(newWallpaper);
+                
+                // Save to localStorage as backup
+                localStorage.setItem('uploadedWallpapers', JSON.stringify(wallpapers));
+                
                 renderWallpapers();
                 
-                const message = document.getElementById('adminMessage');
-                message.textContent = 'Wallpaper uploaded successfully!';
+                message.textContent = '✅ Wallpaper uploaded successfully! Note: For permanent storage, images need to be committed to GitHub repository.';
                 message.className = 'admin-message success';
                 
                 document.getElementById('uploadForm').reset();
+                document.getElementById('fileLabel').textContent = '📁 Click to select image file';
+                document.getElementById('fileLabel').classList.remove('has-file');
+                document.getElementById('imagePreview').classList.remove('show');
                 
                 setTimeout(() => {
                     message.textContent = '';
                     message.className = 'admin-message';
-                }, 3000);
+                }, 5000);
             };
             reader.readAsDataURL(file);
         }
     });
+    
+    // Load from localStorage on page load
+    const savedWallpapers = localStorage.getItem('uploadedWallpapers');
+    if (savedWallpapers) {
+        try {
+            const parsed = JSON.parse(savedWallpapers);
+            wallpapers = parsed;
+            renderWallpapers();
+        } catch (e) {
+            console.log('Error loading saved wallpapers');
+        }
+    }
     
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
