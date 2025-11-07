@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PromptAlchemy Wallpaper - Futuristic HD Wallpapers</title>
+    <title>PromptAlchemy Wallpaper - Premium HD Wallpapers</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    
+    <!-- Image Compression Library -->
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+    
     <style>
-/* Reset & Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* ==================== THEME VARIABLES ==================== */
 :root {
+    /* Light Mode Colors */
     --primary-color: #00d4ff;
     --secondary-color: #9d4edd;
     --accent-color: #ff006e;
@@ -25,6 +30,26 @@
     --text-gray: #a0a0a0;
     --card-bg: rgba(20, 20, 30, 0.8);
     --glow-color: rgba(0, 212, 255, 0.5);
+    --navbar-bg: rgba(10, 10, 15, 0.95);
+    --footer-bg: #050508;
+}
+
+[data-theme="light"] {
+    --bg-dark: #f5f5f5;
+    --bg-darker: #e0e0e0;
+    --text-light: #1a1a1a;
+    --text-gray: #666666;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+    --footer-bg: #e0e0e0;
+    --glow-color: rgba(0, 212, 255, 0.3);
+}
+
+/* ==================== BASE STYLES ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -33,9 +58,10 @@ body {
     color: var(--text-light);
     overflow-x: hidden;
     line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Animated Background */
+/* ==================== ANIMATED BACKGROUND ==================== */
 .animated-bg {
     position: fixed;
     top: 0;
@@ -43,7 +69,8 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 100%);
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+    transition: background 0.3s ease;
 }
 
 .grid-overlay {
@@ -68,15 +95,16 @@ body {
     height: 100%;
 }
 
-/* Navigation */
+/* ==================== NAVIGATION ==================== */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(10, 10, 15, 0.95);
+    background: var(--navbar-bg);
     backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    transition: background 0.3s ease;
 }
 
 .nav-container {
@@ -148,6 +176,24 @@ body {
     text-shadow: 0 0 10px var(--glow-color);
 }
 
+/* Theme Toggle */
+.theme-toggle {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
 .user-info {
     display: flex;
     align-items: center;
@@ -157,6 +203,15 @@ body {
 .user-email {
     color: var(--primary-color);
     font-size: 0.9rem;
+}
+
+.admin-badge {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
 }
 
 .logout-btn {
@@ -192,7 +247,7 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Auth Modal */
+/* ==================== AUTH MODAL ==================== */
 .auth-modal {
     display: none;
     position: fixed;
@@ -287,6 +342,11 @@ body {
     transition: all 0.3s ease;
 }
 
+[data-theme="light"] .auth-input {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-light);
+}
+
 .auth-input:focus {
     outline: none;
     border-color: var(--primary-color);
@@ -297,7 +357,7 @@ body {
     width: 100%;
     padding: 1.2rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--text-light);
+    color: white;
     border: none;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 600;
@@ -311,6 +371,34 @@ body {
 .auth-submit:hover {
     box-shadow: 0 0 20px var(--glow-color);
     transform: translateY(-2px);
+}
+
+.auth-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.google-signin-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: white;
+    color: #333;
+    border: 2px solid #ddd;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.google-signin-btn:hover {
+    background: #f5f5f5;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .auth-message {
@@ -333,7 +421,7 @@ body {
     color: #ff0000;
 }
 
-/* Progress Bar */
+/* ==================== PROGRESS BAR ==================== */
 .upload-progress {
     display: none;
     margin: 1rem 0;
@@ -357,11 +445,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-light);
+    color: white;
     font-weight: 600;
 }
 
-/* Hero Section - Enhanced */
+.progress-text {
+    text-align: center;
+    margin-top: 0.5rem;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+/* ==================== HERO SECTION ==================== */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -451,13 +546,19 @@ body {
 
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--text-light);
+    color: white;
     box-shadow: 0 0 20px var(--glow-color);
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 0 30px var(--glow-color);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .btn-secondary {
@@ -513,7 +614,7 @@ body {
     margin-top: 0.5rem;
 }
 
-/* Features Section */
+/* ==================== FEATURES SECTION ==================== */
 .features-section {
     padding: 6rem 2rem;
     background: rgba(10, 10, 15, 0.3);
@@ -558,7 +659,7 @@ body {
     line-height: 1.6;
 }
 
-/* Search Section */
+/* ==================== SEARCH SECTION ==================== */
 .search-section {
     padding: 4rem 2rem;
     background: rgba(10, 10, 15, 0.5);
@@ -599,7 +700,7 @@ body {
 .search-btn {
     padding: 1rem 2rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--text-light);
+    color: white;
     border: none;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 600;
@@ -639,7 +740,7 @@ body {
     box-shadow: 0 0 15px var(--glow-color);
 }
 
-/* Section Titles */
+/* ==================== SECTION TITLES ==================== */
 .section-title {
     font-family: 'Orbitron', sans-serif;
     font-size: 3rem;
@@ -655,7 +756,7 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
-/* Categories Section */
+/* ==================== CATEGORIES SECTION ==================== */
 .categories-section {
     padding: 6rem 2rem;
 }
@@ -721,7 +822,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Gallery Section */
+/* ==================== GALLERY SECTION ==================== */
 .gallery-section {
     padding: 6rem 2rem;
     background: rgba(10, 10, 15, 0.5);
@@ -756,6 +857,16 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    /* Lazy loading placeholder */
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(157, 78, 221, 0.1));
+}
+
+.wallpaper-image[data-src] {
+    filter: blur(10px);
+}
+
+.wallpaper-image.loaded {
+    filter: blur(0);
 }
 
 .wallpaper-card:hover .wallpaper-image {
@@ -798,11 +909,16 @@ body {
     color: var(--text-gray);
 }
 
-.download-btn {
-    width: 100%;
+.wallpaper-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.download-btn, .delete-btn {
+    flex: 1;
     padding: 0.8rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--text-light);
+    color: white;
     border: none;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 600;
@@ -812,7 +928,11 @@ body {
     transition: all 0.3s ease;
 }
 
-.download-btn:hover {
+.delete-btn {
+    background: linear-gradient(135deg, var(--accent-color), #d00000);
+}
+
+.download-btn:hover, .delete-btn:hover {
     box-shadow: 0 0 20px var(--glow-color);
 }
 
@@ -820,7 +940,7 @@ body {
     text-align: center;
 }
 
-/* Admin Section - Enhanced */
+/* ==================== ADMIN SECTION ==================== */
 .admin-section {
     padding: 6rem 2rem;
 }
@@ -858,6 +978,10 @@ body {
     transition: all 0.3s ease;
 }
 
+[data-theme="light"] .admin-input {
+    background: rgba(255, 255, 255, 0.9);
+}
+
 .admin-input:focus {
     outline: none;
     border-color: var(--primary-color);
@@ -884,6 +1008,10 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--text-gray);
+}
+
+[data-theme="light"] .file-upload-label {
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .file-upload-label:hover {
@@ -972,11 +1100,12 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Footer - Enhanced */
+/* ==================== FOOTER ==================== */
 .footer {
-    background: var(--bg-darker);
+    background: var(--footer-bg);
     border-top: 1px solid rgba(0, 212, 255, 0.2);
     padding: 4rem 2rem 2rem;
+    transition: background 0.3s ease;
 }
 
 .footer-content {
@@ -1075,7 +1204,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Modal */
+/* ==================== MODAL ==================== */
 .modal {
     display: none;
     position: fixed;
@@ -1141,10 +1270,37 @@ body {
     margin-bottom: 1rem;
 }
 
-/* Responsive Design */
+/* ==================== LOADING SPINNER ==================== */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--navbar-bg);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1rem;
+    }
+    
+    .nav-links.active {
+        display: flex;
     }
     
     .mobile-menu-toggle {
@@ -1198,11 +1354,29 @@ body {
     }
 }
 
+/* ==================== ANIMATIONS ==================== */
 @keyframes float {
     0%, 100% { transform: translateY(0) translateX(0); }
     25% { transform: translateY(-20px) translateX(10px); }
     50% { transform: translateY(-40px) translateX(-10px); }
     75% { transform: translateY(-20px) translateX(5px); }
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
 }
     </style>
 </head>
@@ -1228,7 +1402,12 @@ body {
             <form class="auth-form active" id="loginForm">
                 <input type="email" class="auth-input" placeholder="Email Address" required id="loginEmail">
                 <input type="password" class="auth-input" placeholder="Password" required id="loginPassword">
-                <button type="submit" class="auth-submit">Login</button>
+                <button type="submit" class="auth-submit" id="loginSubmitBtn">
+                    <span id="loginBtnText">Login</span>
+                </button>
+                <button type="button" class="google-signin-btn" id="googleSignInBtn">
+                    <span>🔐</span> Sign in with Google
+                </button>
                 <div class="auth-message" id="loginMessage"></div>
             </form>
             
@@ -1238,7 +1417,9 @@ body {
                 <input type="email" class="auth-input" placeholder="Email Address" required id="signupEmail">
                 <input type="password" class="auth-input" placeholder="Password (min 6 characters)" required id="signupPassword" minlength="6">
                 <input type="password" class="auth-input" placeholder="Confirm Password" required id="signupConfirm" minlength="6">
-                <button type="submit" class="auth-submit">Create Account</button>
+                <button type="submit" class="auth-submit" id="signupSubmitBtn">
+                    <span id="signupBtnText">Create Account</span>
+                </button>
                 <div class="auth-message" id="signupMessage"></div>
             </form>
         </div>
@@ -1255,8 +1436,14 @@ body {
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#gallery" class="nav-link">Gallery</a></li>
                 <li><a href="#categories" class="nav-link">Categories</a></li>
-                <li><a href="#admin" class="nav-link admin-link">Upload</a></li>
+                <li><a href="#admin" class="nav-link admin-link" id="uploadNavLink">Upload</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+                </li>
                 <li class="user-info" id="userInfo" style="display: none;">
+                    <span class="admin-badge">ADMIN</span>
                     <span class="user-email" id="userEmail"></span>
                     <button class="logout-btn" id="logoutBtn">Logout</button>
                 </li>
@@ -1288,15 +1475,15 @@ body {
         </div>
         <div class="hero-stats">
             <div class="stat-item">
-                <span class="stat-number" data-target="500">0</span>
+                <span class="stat-number" id="totalWallpapers">0</span>
                 <span class="stat-label">Wallpapers</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number" data-target="5">0</span>
+                <span class="stat-number" data-target="5">5</span>
                 <span class="stat-label">Categories</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number" data-target="4">0</span>
+                <span class="stat-number" data-target="4">4</span>
                 <span class="stat-label">K+ Downloads</span>
             </div>
         </div>
@@ -1314,8 +1501,8 @@ body {
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">Instant Downloads</h3>
-                    <p class="feature-description">One-click downloads with no registration required. Get your favorite wallpapers instantly.</p>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-description">Cloud-powered delivery with CDN ensures instant loading and downloads from anywhere in the world.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🌈</div>
@@ -1331,7 +1518,7 @@ body {
         <div class="container">
             <div class="search-container">
                 <input type="text" id="searchInput" class="search-input" placeholder="Search wallpapers...">
-                <button class="search-btn">Search</button>
+                <button class="search-btn" id="searchBtn">Search</button>
             </div>
             <div class="filter-container">
                 <select id="categoryFilter" class="filter-select">
@@ -1361,31 +1548,31 @@ body {
                 <div class="category-card" data-category="cyberpunk">
                     <div class="category-overlay">
                         <h3 class="category-title">Cyberpunk</h3>
-                        <p class="category-count">120+ wallpapers</p>
+                        <p class="category-count" id="count-cyberpunk">0 wallpapers</p>
                     </div>
                 </div>
                 <div class="category-card" data-category="abstract">
                     <div class="category-overlay">
                         <h3 class="category-title">Abstract</h3>
-                        <p class="category-count">95+ wallpapers</p>
+                        <p class="category-count" id="count-abstract">0 wallpapers</p>
                     </div>
                 </div>
                 <div class="category-card" data-category="minimal">
                     <div class="category-overlay">
                         <h3 class="category-title">Minimal</h3>
-                        <p class="category-count">80+ wallpapers</p>
+                        <p class="category-count" id="count-minimal">0 wallpapers</p>
                     </div>
                 </div>
                 <div class="category-card" data-category="nature">
                     <div class="category-overlay">
                         <h3 class="category-title">Nature</h3>
-                        <p class="category-count">110+ wallpapers</p>
+                        <p class="category-count" id="count-nature">0 wallpapers</p>
                     </div>
                 </div>
                 <div class="category-card" data-category="luxury">
                     <div class="category-overlay">
                         <h3 class="category-title">Luxury</h3>
-                        <p class="category-count">95+ wallpapers</p>
+                        <p class="category-count" id="count-luxury">0 wallpapers</p>
                     </div>
                 </div>
             </div>
@@ -1411,8 +1598,8 @@ body {
             <h2 class="section-title">Upload <span class="highlight">Wallpaper</span></h2>
             <div class="admin-container">
                 <div class="login-required" id="loginRequired">
-                    <h3>🔒 Login Required</h3>
-                    <p>Please login to upload wallpapers</p>
+                    <h3>🔒 Admin Access Required</h3>
+                    <p>Please login with admin credentials to upload wallpapers</p>
                     <button class="btn btn-primary" onclick="openAuthModal()">Login / Sign Up</button>
                 </div>
                 
@@ -1421,10 +1608,11 @@ body {
                     <div class="upload-instructions">
                         <strong>📋 Upload Guidelines:</strong>
                         <ul>
-                            <li>Supported formats: JPG, PNG, WebP</li>
-                            <li>Images are automatically compressed for fast upload</li>
-                            <li>Stored permanently in cloud storage</li>
-                            <li>Fill all fields before uploading</li>
+                            <li>✅ Supported formats: JPG, PNG, WebP</li>
+                            <li>⚡ Images automatically compressed for fast upload</li>
+                            <li>☁️ Stored permanently in cloud storage (Firebase)</li>
+                            <li>🌍 Accessible from all devices worldwide</li>
+                            <li>📱 Optimized for mobile and desktop viewing</li>
                         </ul>
                     </div>
                     <form id="uploadForm" class="upload-form">
@@ -1450,9 +1638,12 @@ body {
                             <div class="progress-bar">
                                 <div class="progress-fill" id="progressFill">0%</div>
                             </div>
+                            <p class="progress-text" id="progressText">Preparing upload...</p>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary" id="uploadBtn">🚀 Upload Wallpaper</button>
+                        <button type="submit" class="btn btn-primary" id="uploadBtn">
+                            <span id="uploadBtnText">🚀 Upload Wallpaper</span>
+                        </button>
                     </form>
                     <div class="admin-message" id="adminMessage"></div>
                 </div>
@@ -1466,7 +1657,7 @@ body {
             <div class="footer-content">
                 <div class="footer-section">
                     <h3 class="footer-title">PromptAlchemy Wallpaper</h3>
-                    <p class="footer-description">Your destination for premium futuristic wallpapers. Curated with passion, designed for perfection.</p>
+                    <p class="footer-description">Your destination for premium futuristic wallpapers. Curated with passion, designed for perfection. Powered by Firebase cloud storage for global accessibility.</p>
                 </div>
                 <div class="footer-section">
                     <h4 class="footer-subtitle">Quick Links</h4>
@@ -1512,627 +1703,7 @@ body {
         </div>
     </div>
 
-    <script>
-// Authentication System
-class AuthSystem {
-    constructor() {
-        this.currentUser = null;
-        this.loadUser();
-    }
-    
-    loadUser() {
-        const userData = localStorage.getItem('currentUser');
-        if (userData) {
-            this.currentUser = JSON.parse(userData);
-            this.updateUI();
-        }
-    }
-    
-    saveUser(user) {
-        this.currentUser = user;
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.updateUI();
-    }
-    
-    logout() {
-        this.currentUser = null;
-        localStorage.removeItem('currentUser');
-        this.updateUI();
-    }
-    
-    updateUI() {
-        const userInfo = document.getElementById('userInfo');
-        const loginNavBtn = document.getElementById('loginNavBtn');
-        const userEmail = document.getElementById('userEmail');
-        const loginRequired = document.getElementById('loginRequired');
-        const adminPanel = document.getElementById('adminPanel');
-        
-        if (this.currentUser) {
-            userInfo.style.display = 'flex';
-            loginNavBtn.style.display = 'none';
-            userEmail.textContent = this.currentUser.email;
-            loginRequired.style.display = 'none';
-            adminPanel.style.display = 'block';
-        } else {
-            userInfo.style.display = 'none';
-            loginNavBtn.style.display = 'block';
-            loginRequired.style.display = 'block';
-            adminPanel.style.display = 'none';
-        }
-    }
-    
-    signup(name, email, password) {
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        
-        if (users.find(u => u.email === email)) {
-            return { success: false, message: 'Email already registered' };
-        }
-        
-        const user = {
-            id: Date.now(),
-            name,
-            email,
-            password: btoa(password), // Simple encoding (use proper hashing in production)
-            createdAt: new Date().toISOString()
-        };
-        
-        users.push(user);
-        localStorage.setItem('users', JSON.stringify(users));
-        
-        return { success: true, message: 'Account created successfully!' };
-    }
-    
-    login(email, password) {
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const user = users.find(u => u.email === email && u.password === btoa(password));
-        
-        if (user) {
-            this.saveUser({ id: user.id, name: user.name, email: user.email });
-            return { success: true, message: 'Login successful!' };
-        }
-        
-        return { success: false, message: 'Invalid email or password' };
-    }
-}
-
-const auth = new AuthSystem();
-
-// Image Compression
-async function compressImage(file, maxWidth = 1920, quality = 0.8) {
-    return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const img = new Image();
-            img.onload = () => {
-                const canvas = document.createElement('canvas');
-                let width = img.width;
-                let height = img.height;
-                
-                if (width > maxWidth) {
-                    height = (height * maxWidth) / width;
-                    width = maxWidth;
-                }
-                
-                canvas.width = width;
-                canvas.height = height;
-                
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, width, height);
-                
-                canvas.toBlob((blob) => {
-                    resolve(blob);
-                }, 'image/jpeg', quality);
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-// Sample wallpaper data
-let wallpapers = [
-    {
-        id: 1,
-        title: 'Neon City',
-        category: 'cyberpunk',
-        resolution: '3840x2160',
-        image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800',
-        downloadUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=3840'
-    },
-    {
-        id: 2,
-        title: 'Abstract Flow',
-        category: 'abstract',
-        resolution: '2560x1440',
-        image: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800',
-        downloadUrl: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=2560'
-    },
-    {
-        id: 3,
-        title: 'Minimal Gradient',
-        category: 'minimal',
-        resolution: '1920x1080',
-        image: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=800',
-        downloadUrl: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920'
-    },
-    {
-        id: 4,
-        title: 'Mountain Vista',
-        category: 'nature',
-        resolution: '3840x2160',
-        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
-        downloadUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=3840'
-    },
-    {
-        id: 5,
-        title: 'Gold Luxury',
-        category: 'luxury',
-        resolution: '2560x1440',
-        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800',
-        downloadUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=2560'
-    },
-    {
-        id: 6,
-        title: 'Cyber Grid',
-        category: 'cyberpunk',
-        resolution: '3840x2160',
-        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
-        downloadUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=3840'
-    },
-    {
-        id: 7,
-        title: 'Fluid Art',
-        category: 'abstract',
-        resolution: '2560x1440',
-        image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800',
-        downloadUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=2560'
-    },
-    {
-        id: 8,
-        title: 'Clean Lines',
-        category: 'minimal',
-        resolution: '1920x1080',
-        image: 'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=800',
-        downloadUrl: 'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=1920'
-    },
-    {
-        id: 9,
-        title: 'Forest Path',
-        category: 'nature',
-        resolution: '3840x2160',
-        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
-        downloadUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=3840'
-    }
-];
-
-let displayedWallpapers = 6;
-let currentFilter = { category: 'all', resolution: 'all', search: '' };
-
-// Load saved wallpapers
-function loadSavedWallpapers() {
-    const saved = localStorage.getItem('wallpapers');
-    if (saved) {
-        try {
-            const parsed = JSON.parse(saved);
-            wallpapers = [...parsed, ...wallpapers.filter(w => w.id <= 9)];
-        } catch (e) {
-            console.log('Error loading wallpapers');
-        }
-    }
-}
-
-// Save wallpapers
-function saveWallpapers() {
-    const userWallpapers = wallpapers.filter(w => w.id > 9);
-    localStorage.setItem('wallpapers', JSON.stringify(userWallpapers));
-}
-
-// Initialize particles
-function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = Math.random() * 3 + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.background = 'rgba(0, 212, 255, 0.5)';
-        particle.style.borderRadius = '50%';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animation = `float ${Math.random() * 10 + 5}s linear infinite`;
-        particle.style.boxShadow = '0 0 10px rgba(0, 212, 255, 0.8)';
-        particlesContainer.appendChild(particle);
-    }
-}
-
-// Animate stats counter
-function animateStats() {
-    const stats = document.querySelectorAll('.stat-number');
-    stats.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        const duration = 2000;
-        const increment = target / (duration / 16);
-        let current = 0;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                stat.textContent = target;
-                clearInterval(timer);
-            } else {
-                stat.textContent = Math.floor(current);
-            }
-        }, 16);
-    });
-}
-
-// Render wallpapers
-function renderWallpapers() {
-    const galleryGrid = document.getElementById('galleryGrid');
-    galleryGrid.innerHTML = '';
-    
-    let filteredWallpapers = wallpapers.filter(wallpaper => {
-        const categoryMatch = currentFilter.category === 'all' || wallpaper.category === currentFilter.category;
-        const resolutionMatch = currentFilter.resolution === 'all' || wallpaper.resolution === currentFilter.resolution;
-        const searchMatch = currentFilter.search === '' || 
-            wallpaper.title.toLowerCase().includes(currentFilter.search.toLowerCase()) ||
-            wallpaper.category.toLowerCase().includes(currentFilter.search.toLowerCase());
-        
-        return categoryMatch && resolutionMatch && searchMatch;
-    });
-    
-    const wallpapersToShow = filteredWallpapers.slice(0, displayedWallpapers);
-    
-    wallpapersToShow.forEach(wallpaper => {
-        const card = document.createElement('div');
-        card.className = 'wallpaper-card';
-        card.innerHTML = `
-            <img src="${wallpaper.image}" alt="${wallpaper.title}" class="wallpaper-image">
-            <div class="wallpaper-overlay">
-                <h3 class="wallpaper-title">${wallpaper.title}</h3>
-                <div class="wallpaper-info">
-                    <span class="wallpaper-category">${wallpaper.category}</span>
-                    <span class="wallpaper-resolution">${wallpaper.resolution}</span>
-                </div>
-                <button class="download-btn" onclick="downloadWallpaper(${wallpaper.id})">Download</button>
-            </div>
-        `;
-        
-        card.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('download-btn')) {
-                openModal(wallpaper);
-            }
-        });
-        
-        galleryGrid.appendChild(card);
-    });
-    
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    if (displayedWallpapers >= filteredWallpapers.length) {
-        loadMoreBtn.style.display = 'none';
-    } else {
-        loadMoreBtn.style.display = 'inline-block';
-    }
-}
-
-// Download wallpaper
-function downloadWallpaper(id) {
-    const wallpaper = wallpapers.find(w => w.id === id);
-    if (wallpaper) {
-        const link = document.createElement('a');
-        link.href = wallpaper.downloadUrl;
-        link.download = `${wallpaper.title.replace(/\s+/g, '-')}.jpg`;
-        link.target = '_blank';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-}
-
-// Modal functions
-function openModal(wallpaper) {
-    const modal = document.getElementById('wallpaperModal');
-    const modalImage = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalResolution = document.getElementById('modalResolution');
-    const modalDownloadBtn = document.getElementById('modalDownloadBtn');
-    
-    modalImage.src = wallpaper.image;
-    modalTitle.textContent = wallpaper.title;
-    modalResolution.textContent = `${wallpaper.resolution} • ${wallpaper.category}`;
-    modalDownloadBtn.onclick = () => downloadWallpaper(wallpaper.id);
-    
-    modal.classList.add('active');
-}
-
-function closeModal() {
-    const modal = document.getElementById('wallpaperModal');
-    modal.classList.remove('active');
-}
-
-// Auth Modal
-function openAuthModal() {
-    document.getElementById('authModal').classList.add('active');
-}
-
-function closeAuthModal() {
-    document.getElementById('authModal').classList.remove('active');
-}
-
-// File upload preview
-function setupFileUpload() {
-    const fileInput = document.getElementById('wallpaperFile');
-    const fileLabel = document.getElementById('fileLabel');
-    const imagePreview = document.getElementById('imagePreview');
-    
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            fileLabel.textContent = `✅ ${file.name}`;
-            fileLabel.classList.add('has-file');
-            
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                imagePreview.src = e.target.result;
-                imagePreview.classList.add('show');
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-}
-
-// Update progress bar
-function updateProgress(percent) {
-    const progressFill = document.getElementById('progressFill');
-    const uploadProgress = document.getElementById('uploadProgress');
-    
-    uploadProgress.style.display = 'block';
-    progressFill.style.width = percent + '%';
-    progressFill.textContent = Math.round(percent) + '%';
-}
-
-// Event listeners
-document.addEventListener('DOMContentLoaded', () => {
-    createParticles();
-    animateStats();
-    loadSavedWallpapers();
-    renderWallpapers();
-    setupFileUpload();
-    
-    // Auth tabs
-    document.querySelectorAll('.auth-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-            
-            tab.classList.add('active');
-            const formId = tab.dataset.tab === 'login' ? 'loginForm' : 'signupForm';
-            document.getElementById(formId).classList.add('active');
-        });
-    });
-    
-    // Login form
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-        const message = document.getElementById('loginMessage');
-        
-        const result = auth.login(email, password);
-        message.textContent = result.message;
-        message.className = `auth-message ${result.success ? 'success' : 'error'}`;
-        
-        if (result.success) {
-            setTimeout(() => {
-                closeAuthModal();
-                document.getElementById('loginForm').reset();
-                message.textContent = '';
-            }, 1500);
-        }
-    });
-    
-    // Signup form
-    document.getElementById('signupForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('signupName').value;
-        const email = document.getElementById('signupEmail').value;
-        const password = document.getElementById('signupPassword').value;
-        const confirm = document.getElementById('signupConfirm').value;
-        const message = document.getElementById('signupMessage');
-        
-        if (password !== confirm) {
-            message.textContent = 'Passwords do not match';
-            message.className = 'auth-message error';
-            return;
-        }
-        
-        const result = auth.signup(name, email, password);
-        message.textContent = result.message;
-        message.className = `auth-message ${result.success ? 'success' : 'error'}`;
-        
-        if (result.success) {
-            setTimeout(() => {
-                document.querySelectorAll('.auth-tab')[0].click();
-                document.getElementById('signupForm').reset();
-                message.textContent = '';
-            }, 1500);
-        }
-    });
-    
-    // Logout
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-        auth.logout();
-    });
-    
-    // Close auth modal
-    document.getElementById('authClose').addEventListener('click', closeAuthModal);
-    document.getElementById('authModal').addEventListener('click', (e) => {
-        if (e.target.id === 'authModal') {
-            closeAuthModal();
-        }
-    });
-    
-    // Search
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.querySelector('.search-btn');
-    
-    searchBtn.addEventListener('click', () => {
-        currentFilter.search = searchInput.value;
-        displayedWallpapers = 6;
-        renderWallpapers();
-    });
-    
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            currentFilter.search = searchInput.value;
-            displayedWallpapers = 6;
-            renderWallpapers();
-        }
-    });
-    
-    // Filters
-    document.getElementById('categoryFilter').addEventListener('change', (e) => {
-        currentFilter.category = e.target.value;
-        displayedWallpapers = 6;
-        renderWallpapers();
-    });
-    
-    document.getElementById('resolutionFilter').addEventListener('change', (e) => {
-        currentFilter.resolution = e.target.value;
-        displayedWallpapers = 6;
-        renderWallpapers();
-    });
-    
-    // Load more
-    document.getElementById('loadMoreBtn').addEventListener('click', () => {
-        displayedWallpapers += 6;
-        renderWallpapers();
-    });
-    
-    // Category cards
-    document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const category = card.getAttribute('data-category');
-            document.getElementById('categoryFilter').value = category;
-            currentFilter.category = category;
-            displayedWallpapers = 6;
-            renderWallpapers();
-            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-    
-    // Modal close
-    document.querySelector('.modal-close').addEventListener('click', closeModal);
-    document.getElementById('wallpaperModal').addEventListener('click', (e) => {
-        if (e.target.id === 'wallpaperModal') {
-            closeModal();
-        }
-    });
-    
-    // Admin upload with compression
-    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        if (!auth.currentUser) {
-            alert('Please login to upload wallpapers');
-            return;
-        }
-        
-        const title = document.getElementById('wallpaperTitle').value;
-        const category = document.getElementById('wallpaperCategory').value;
-        const resolution = document.getElementById('wallpaperResolution').value;
-        const file = document.getElementById('wallpaperFile').files[0];
-        const message = document.getElementById('adminMessage');
-        const uploadBtn = document.getElementById('uploadBtn');
-        
-        if (file) {
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = '⏳ Compressing...';
-            updateProgress(20);
-            
-            try {
-                // Compress image
-                const compressedBlob = await compressImage(file);
-                updateProgress(60);
-                
-                // Convert to base64
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    updateProgress(80);
-                    
-                    const newWallpaper = {
-                        id: Date.now(),
-                        title: title,
-                        category: category,
-                        resolution: resolution,
-                        image: e.target.result,
-                        downloadUrl: e.target.result,
-                        uploadDate: new Date().toISOString(),
-                        uploadedBy: auth.currentUser.email
-                    };
-                    
-                    wallpapers.unshift(newWallpaper);
-                    saveWallpapers();
-                    renderWallpapers();
-                    
-                    updateProgress(100);
-                    
-                    message.textContent = '✅ Wallpaper uploaded successfully!';
-                    message.className = 'admin-message success';
-                    
-                    document.getElementById('uploadForm').reset();
-                    document.getElementById('fileLabel').textContent = '📁 Click to select image file';
-                    document.getElementById('fileLabel').classList.remove('has-file');
-                    document.getElementById('imagePreview').classList.remove('show');
-                    
-                    uploadBtn.disabled = false;
-                    uploadBtn.textContent = '🚀 Upload Wallpaper';
-                    
-                    setTimeout(() => {
-                        message.textContent = '';
-                        message.className = 'admin-message';
-                        document.getElementById('uploadProgress').style.display = 'none';
-                        updateProgress(0);
-                    }, 3000);
-                };
-                reader.readAsDataURL(compressedBlob);
-                
-            } catch (error) {
-                message.textContent = '❌ Upload failed. Please try again.';
-                message.className = 'admin-message error';
-                uploadBtn.disabled = false;
-                uploadBtn.textContent = '🚀 Upload Wallpaper';
-            }
-        }
-    });
-    
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-    
-    // Mobile menu
-    document.getElementById('mobileMenuToggle').addEventListener('click', () => {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    });
-});
-
-// Scroll animations
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(10, 10, 15, 0.98)';
-    } else {
-        navbar.style.background = 'rgba(10, 10, 15, 0.95)';
-    }
-});
-    </script>
+    <!-- Main Application Script -->
+    <script src="app.js"></script>
 </body>
 </html>
