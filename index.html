@@ -8,30 +8,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
-    
-    <!-- Image Compression Library -->
-    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
-    
     <style>
-/* ==================== THEME VARIABLES ==================== */
+/* ==================== CSS VARIABLES ==================== */
 :root {
-    /* Light Mode Colors */
-    --primary-color: #00d4ff;
-    --secondary-color: #9d4edd;
-    --accent-color: #ff006e;
+    --primary: #00d4ff;
+    --secondary: #9d4edd;
+    --accent: #ff006e;
+    --success: #00ff88;
+    --error: #ff3366;
+    --warning: #ffaa00;
     --bg-dark: #0a0a0f;
     --bg-darker: #050508;
     --text-light: #ffffff;
     --text-gray: #a0a0a0;
-    --card-bg: rgba(20, 20, 30, 0.8);
-    --glow-color: rgba(0, 212, 255, 0.5);
-    --navbar-bg: rgba(10, 10, 15, 0.95);
-    --footer-bg: #050508;
+    --card-bg: rgba(20, 20, 30, 0.9);
+    --glow: rgba(0, 212, 255, 0.5);
 }
 
 [data-theme="light"] {
@@ -39,13 +30,11 @@
     --bg-darker: #e0e0e0;
     --text-light: #1a1a1a;
     --text-gray: #666666;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --navbar-bg: rgba(255, 255, 255, 0.95);
-    --footer-bg: #e0e0e0;
-    --glow-color: rgba(0, 212, 255, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --glow: rgba(0, 212, 255, 0.3);
 }
 
-/* ==================== BASE STYLES ==================== */
+/* ==================== BASE ==================== */
 * {
     margin: 0;
     padding: 0;
@@ -58,7 +47,7 @@ body {
     color: var(--text-light);
     overflow-x: hidden;
     line-height: 1.6;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 /* ==================== ANIMATED BACKGROUND ==================== */
@@ -70,7 +59,6 @@ body {
     height: 100%;
     z-index: -1;
     background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
-    transition: background 0.3s ease;
 }
 
 .grid-overlay {
@@ -78,8 +66,8 @@ body {
     width: 100%;
     height: 100%;
     background-image: 
-        linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+        linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     animation: gridMove 20s linear infinite;
 }
@@ -89,22 +77,16 @@ body {
     100% { transform: translateY(50px); }
 }
 
-.particles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
 /* ==================== NAVIGATION ==================== */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: var(--navbar-bg);
-    backdrop-filter: blur(10px);
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
     z-index: 1000;
     border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-    transition: background 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
@@ -118,23 +100,21 @@ body {
 
 .logo {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    font-size: 2rem;
 }
 
 .logo-text {
     font-family: 'Orbitron', sans-serif;
     font-size: 1.5rem;
     font-weight: 900;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px var(--glow-color);
-}
-
-.logo-subtitle {
-    font-size: 0.8rem;
-    color: var(--text-gray);
-    letter-spacing: 2px;
 }
 
 .nav-links {
@@ -153,386 +133,53 @@ body {
     letter-spacing: 1px;
     transition: all 0.3s ease;
     position: relative;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-color);
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
+    padding: 0.5rem 1rem;
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
-    text-shadow: 0 0 10px var(--glow-color);
+    color: var(--primary);
 }
 
-/* Theme Toggle */
+.nav-link.active {
+    color: var(--primary);
+}
+
 .theme-toggle {
     background: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 2px solid var(--primary);
+    color: var(--primary);
     padding: 0.5rem 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1.2rem;
     transition: all 0.3s ease;
 }
 
 .theme-toggle:hover {
-    background: var(--primary-color);
-    color: var(--bg-dark);
-    box-shadow: 0 0 15px var(--glow-color);
+    background: var(--primary);
+    color: white;
+    transform: scale(1.05);
 }
 
-.user-info {
+.user-badge {
     display: flex;
     align-items: center;
     gap: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
 }
 
 .user-email {
-    color: var(--primary-color);
-    font-size: 0.9rem;
-}
-
-.admin-badge {
-    background: var(--accent-color);
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.75rem;
+    color: var(--primary);
     font-weight: 600;
-}
-
-.logout-btn {
-    padding: 0.5rem 1rem;
-    background: transparent;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.logout-btn:hover {
-    background: var(--accent-color);
-    color: var(--text-light);
-}
-
-.mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.mobile-menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--primary-color);
-    transition: all 0.3s ease;
-}
-
-/* ==================== AUTH MODAL ==================== */
-.auth-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 3000;
-    justify-content: center;
-    align-items: center;
-}
-
-.auth-modal.active {
-    display: flex;
-}
-
-.auth-content {
-    background: var(--card-bg);
-    border: 2px solid var(--primary-color);
-    border-radius: 10px;
-    padding: 3rem;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 0 50px var(--glow-color);
-}
-
-.auth-close {
-    float: right;
-    font-size: 2rem;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.auth-close:hover {
-    color: var(--accent-color);
-}
-
-.auth-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    text-align: center;
-    clear: both;
-}
-
-.auth-tabs {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.auth-tab {
-    flex: 1;
-    padding: 1rem;
-    background: transparent;
-    border: 2px solid rgba(0, 212, 255, 0.3);
-    color: var(--text-gray);
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.auth-tab.active {
-    background: var(--primary-color);
-    color: var(--bg-dark);
-    border-color: var(--primary-color);
-}
-
-.auth-form {
-    display: none;
-}
-
-.auth-form.active {
-    display: block;
-}
-
-.auth-input {
-    width: 100%;
-    padding: 1.2rem;
-    margin-bottom: 1.5rem;
-    background: rgba(10, 10, 15, 0.8);
-    border: 2px solid rgba(0, 212, 255, 0.3);
-    color: var(--text-light);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1rem;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-[data-theme="light"] .auth-input {
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--text-light);
-}
-
-.auth-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 15px var(--glow-color);
-}
-
-.auth-submit {
-    width: 100%;
-    padding: 1.2rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.auth-submit:hover {
-    box-shadow: 0 0 20px var(--glow-color);
-    transform: translateY(-2px);
-}
-
-.auth-submit:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.google-signin-btn {
-    width: 100%;
-    padding: 1.2rem;
-    background: white;
-    color: #333;
-    border: 2px solid #ddd;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.google-signin-btn:hover {
-    background: #f5f5f5;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.auth-message {
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: 600;
-}
-
-.auth-message.success {
-    background: rgba(0, 255, 0, 0.1);
-    border: 1px solid rgba(0, 255, 0, 0.3);
-    color: #00ff00;
-}
-
-.auth-message.error {
-    background: rgba(255, 0, 0, 0.1);
-    border: 1px solid rgba(255, 0, 0, 0.3);
-    color: #ff0000;
-}
-
-/* ==================== PROGRESS BAR ==================== */
-.upload-progress {
-    display: none;
-    margin: 1rem 0;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 30px;
-    background: rgba(10, 10, 15, 0.8);
-    border: 2px solid rgba(0, 212, 255, 0.3);
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    width: 0%;
-    transition: width 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 600;
-}
-
-.progress-text {
-    text-align: center;
-    margin-top: 0.5rem;
-    color: var(--text-gray);
-    font-size: 0.9rem;
-}
-
-/* ==================== HERO SECTION ==================== */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 8rem 2rem 4rem;
-    position: relative;
-}
-
-.hero-content {
-    max-width: 1000px;
-    z-index: 1;
-}
-
-.hero-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 5.5rem;
-    font-weight: 900;
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.glitch {
-    position: relative;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: glowPulse 2s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-    0%, 100% { filter: drop-shadow(0 0 20px var(--glow-color)); }
-    50% { filter: drop-shadow(0 0 40px var(--glow-color)); }
-}
-
-.hero-subtitle {
-    font-size: 2.8rem;
-    color: var(--text-gray);
-    letter-spacing: 8px;
-    text-transform: uppercase;
-}
-
-.hero-description {
-    font-size: 1.3rem;
-    color: var(--text-gray);
-    margin-bottom: 2.5rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.8;
-}
-
-.hero-tagline {
-    font-size: 1.1rem;
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
 }
 
 .btn {
-    padding: 1.2rem 3rem;
+    padding: 0.8rem 2rem;
     font-family: 'Rajdhani', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -541,128 +188,128 @@ body {
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
-    box-shadow: 0 0 20px var(--glow-color);
+    box-shadow: 0 4px 15px var(--glow);
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 30px var(--glow-color);
-}
-
-.btn-primary:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--glow);
 }
 
 .btn-secondary {
     background: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    color: var(--primary);
+    border: 2px solid var(--primary);
 }
 
 .btn-secondary:hover {
-    background: var(--primary-color);
-    color: var(--bg-dark);
-    box-shadow: 0 0 20px var(--glow-color);
+    background: var(--primary);
+    color: white;
 }
 
-.hero-stats {
+.btn-danger {
+    background: linear-gradient(135deg, var(--error), #d00000);
+    color: white;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 51, 102, 0.5);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ==================== HERO ==================== */
+.hero {
+    min-height: 100vh;
     display: flex;
-    gap: 5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+}
+
+.hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 20px var(--glow)); }
+    50% { filter: drop-shadow(0 0 40px var(--glow)); }
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-gray);
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stats {
+    display: flex;
+    gap: 4rem;
     margin-top: 4rem;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem 2rem;
-    background: rgba(0, 212, 255, 0.05);
-    border: 1px solid rgba(0, 212, 255, 0.2);
-    border-radius: 10px;
+.stat-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 2px solid rgba(0, 212, 255, 0.2);
+    min-width: 150px;
     transition: all 0.3s ease;
 }
 
-.stat-item:hover {
-    background: rgba(0, 212, 255, 0.1);
-    border-color: var(--primary-color);
+.stat-card:hover {
+    border-color: var(--primary);
     transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--glow);
 }
 
 .stat-number {
     font-family: 'Orbitron', sans-serif;
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 900;
-    color: var(--primary-color);
-    text-shadow: 0 0 20px var(--glow-color);
+    color: var(--primary);
 }
 
 .stat-label {
-    font-size: 1rem;
     color: var(--text-gray);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: 0.9rem;
     margin-top: 0.5rem;
 }
 
-/* ==================== FEATURES SECTION ==================== */
-.features-section {
+/* ==================== SECTIONS ==================== */
+.section {
     padding: 6rem 2rem;
-    background: rgba(10, 10, 15, 0.3);
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.feature-card {
-    background: var(--card-bg);
-    border: 2px solid rgba(0, 212, 255, 0.2);
-    border-radius: 10px;
-    padding: 2.5rem;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-10px);
-    box-shadow: 0 10px 40px var(--glow-color);
-}
-
-.feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-}
-
-.feature-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.feature-description {
-    color: var(--text-gray);
-    line-height: 1.6;
-}
-
-/* ==================== SEARCH SECTION ==================== */
-.search-section {
-    padding: 4rem 2rem;
-    background: rgba(10, 10, 15, 0.5);
 }
 
 .container {
@@ -670,77 +317,6 @@ body {
     margin: 0 auto;
 }
 
-.search-container {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.search-input {
-    flex: 1;
-    padding: 1rem 1.5rem;
-    background: var(--card-bg);
-    border: 2px solid rgba(0, 212, 255, 0.3);
-    color: var(--text-light);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1rem;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 20px var(--glow-color);
-}
-
-.search-btn {
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.search-btn:hover {
-    box-shadow: 0 0 20px var(--glow-color);
-    transform: translateY(-2px);
-}
-
-.filter-container {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.filter-select {
-    padding: 0.8rem 1.5rem;
-    background: var(--card-bg);
-    border: 2px solid rgba(0, 212, 255, 0.3);
-    color: var(--text-light);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.filter-select:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 15px var(--glow-color);
-}
-
-/* ==================== SECTION TITLES ==================== */
 .section-title {
     font-family: 'Orbitron', sans-serif;
     font-size: 3rem;
@@ -751,83 +327,12 @@ body {
 }
 
 .highlight {
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* ==================== CATEGORIES SECTION ==================== */
-.categories-section {
-    padding: 6rem 2rem;
-}
-
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.category-card {
-    position: relative;
-    height: 250px;
-    background: var(--card-bg);
-    border: 2px solid rgba(0, 212, 255, 0.2);
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.category-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(157, 78, 221, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.category-card:hover::before {
-    opacity: 1;
-}
-
-.category-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary-color);
-    box-shadow: 0 10px 40px var(--glow-color);
-}
-
-.category-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 2rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-}
-
-.category-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.category-count {
-    color: var(--text-gray);
-    font-size: 0.9rem;
-}
-
-/* ==================== GALLERY SECTION ==================== */
-.gallery-section {
-    padding: 6rem 2rem;
-    background: rgba(10, 10, 15, 0.5);
-}
-
+/* ==================== GALLERY ==================== */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -840,7 +345,7 @@ body {
     height: 400px;
     background: var(--card-bg);
     border: 2px solid rgba(0, 212, 255, 0.2);
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -848,8 +353,8 @@ body {
 
 .wallpaper-card:hover {
     transform: translateY(-10px);
-    border-color: var(--primary-color);
-    box-shadow: 0 10px 40px var(--glow-color);
+    border-color: var(--primary);
+    box-shadow: 0 10px 40px var(--glow);
 }
 
 .wallpaper-image {
@@ -857,16 +362,6 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
-    /* Lazy loading placeholder */
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(157, 78, 221, 0.1));
-}
-
-.wallpaper-image[data-src] {
-    filter: blur(10px);
-}
-
-.wallpaper-image.loaded {
-    filter: blur(0);
 }
 
 .wallpaper-card:hover .wallpaper-image {
@@ -892,21 +387,16 @@ body {
     font-family: 'Orbitron', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--text-light);
+    color: white;
     margin-bottom: 0.5rem;
 }
 
 .wallpaper-info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-bottom: 1rem;
-}
-
-.wallpaper-category,
-.wallpaper-resolution {
-    font-size: 0.85rem;
     color: var(--text-gray);
+    font-size: 0.9rem;
 }
 
 .wallpaper-actions {
@@ -914,198 +404,220 @@ body {
     gap: 0.5rem;
 }
 
-.download-btn, .delete-btn {
+.wallpaper-actions .btn {
     flex: 1;
-    padding: 0.8rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    padding: 0.6rem;
+    font-size: 0.9rem;
 }
 
-.delete-btn {
-    background: linear-gradient(135deg, var(--accent-color), #d00000);
+/* ==================== SEARCH & FILTERS ==================== */
+.search-section {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 3rem 2rem;
 }
 
-.download-btn:hover, .delete-btn:hover {
-    box-shadow: 0 0 20px var(--glow-color);
+.search-container {
+    display: flex;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
 }
 
-.load-more-container {
-    text-align: center;
-}
-
-/* ==================== ADMIN SECTION ==================== */
-.admin-section {
-    padding: 6rem 2rem;
-}
-
-.admin-container {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.admin-panel {
+.search-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
     background: var(--card-bg);
-    border: 2px solid rgba(0, 212, 255, 0.2);
-    border-radius: 10px;
-    padding: 3rem;
-}
-
-.admin-panel h3 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.admin-input {
-    width: 100%;
-    padding: 1.2rem;
-    margin-bottom: 1.5rem;
-    background: rgba(10, 10, 15, 0.8);
     border: 2px solid rgba(0, 212, 255, 0.3);
     color: var(--text-light);
     font-family: 'Rajdhani', sans-serif;
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
-[data-theme="light"] .admin-input {
-    background: rgba(255, 255, 255, 0.9);
-}
-
-.admin-input:focus {
+.search-input:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 15px var(--glow-color);
+    border-color: var(--primary);
+    box-shadow: 0 0 20px var(--glow);
 }
 
-.upload-form {
+.filter-container {
     display: flex;
-    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.file-upload-wrapper {
-    position: relative;
-    margin-bottom: 1.5rem;
-}
-
-.file-upload-label {
-    display: block;
-    padding: 1.2rem;
-    background: rgba(10, 10, 15, 0.8);
-    border: 2px dashed rgba(0, 212, 255, 0.3);
-    border-radius: 5px;
-    text-align: center;
+.filter-select {
+    padding: 0.8rem 1.5rem;
+    background: var(--card-bg);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    color: var(--text-light);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: var(--text-gray);
 }
 
-[data-theme="light"] .file-upload-label {
-    background: rgba(255, 255, 255, 0.9);
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary);
 }
 
-.file-upload-label:hover {
-    border-color: var(--primary-color);
-    background: rgba(0, 212, 255, 0.05);
+/* ==================== TOAST NOTIFICATIONS ==================== */
+.toast-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.file-upload-label.has-file {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-}
-
-#wallpaperFile {
-    display: none;
-}
-
-.image-preview {
-    margin-top: 1rem;
-    max-width: 100%;
-    max-height: 300px;
-    border-radius: 5px;
-    border: 2px solid var(--primary-color);
-    display: none;
-}
-
-.image-preview.show {
-    display: block;
-}
-
-.upload-instructions {
-    background: rgba(0, 212, 255, 0.05);
-    border: 1px solid rgba(0, 212, 255, 0.2);
-    border-radius: 5px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    color: var(--text-gray);
-}
-
-.upload-instructions ul {
-    margin-left: 1.5rem;
-    margin-top: 0.5rem;
-}
-
-.upload-instructions li {
-    margin-bottom: 0.3rem;
-}
-
-.admin-message {
-    margin-top: 1.5rem;
-    padding: 1.2rem;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: 600;
-}
-
-.admin-message.success {
-    background: rgba(0, 255, 0, 0.1);
-    border: 1px solid rgba(0, 255, 0, 0.3);
-    color: #00ff00;
-}
-
-.admin-message.error {
-    background: rgba(255, 0, 0, 0.1);
-    border: 1px solid rgba(255, 0, 0, 0.3);
-    color: #ff0000;
-}
-
-.login-required {
-    text-align: center;
-    padding: 3rem;
+.toast {
     background: var(--card-bg);
-    border: 2px solid rgba(0, 212, 255, 0.2);
-    border-radius: 10px;
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    min-width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-.login-required h3 {
-    font-family: 'Orbitron', sans-serif;
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast.success {
+    border-color: var(--success);
+}
+
+.toast.error {
+    border-color: var(--error);
+}
+
+.toast.warning {
+    border-color: var(--warning);
+}
+
+.toast-icon {
+    font-size: 1.5rem;
+}
+
+.toast-message {
+    flex: 1;
+    color: var(--text-light);
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: var(--text-gray);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* ==================== LOADING SPINNER ==================== */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================== MODAL ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-light);
     font-size: 2rem;
-    color: var(--primary-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--error);
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 8px;
     margin-bottom: 1rem;
 }
 
-.login-required p {
+.modal-info {
+    text-align: center;
+}
+
+.modal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.modal-details {
     color: var(--text-gray);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 /* ==================== FOOTER ==================== */
 .footer {
-    background: var(--footer-bg);
+    background: var(--bg-darker);
     border-top: 1px solid rgba(0, 212, 255, 0.2);
     padding: 4rem 2rem 2rem;
-    transition: background 0.3s ease;
 }
 
 .footer-content {
@@ -1119,21 +631,9 @@ body {
     font-family: 'Orbitron', sans-serif;
     font-size: 1.5rem;
     font-weight: 900;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-}
-
-.footer-description {
-    color: var(--text-gray);
-    font-size: 0.9rem;
-}
-
-.footer-subtitle {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.1rem;
-    color: var(--primary-color);
     margin-bottom: 1rem;
 }
 
@@ -1152,48 +652,7 @@ body {
 }
 
 .footer-links a:hover {
-    color: var(--primary-color);
-}
-
-.social-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.social-link {
-    padding: 0.8rem 1.2rem;
-    background: rgba(0, 212, 255, 0.1);
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    color: var(--primary-color);
-    text-decoration: none;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.social-link:hover {
-    background: var(--primary-color);
-    color: var(--bg-dark);
-    box-shadow: 0 0 15px var(--glow-color);
-    transform: translateX(5px);
-}
-
-.contact-info {
-    color: var(--text-gray);
-    line-height: 1.8;
-}
-
-.contact-info a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.contact-info a:hover {
-    color: var(--secondary-color);
+    color: var(--primary);
 }
 
 .footer-bottom {
@@ -1201,118 +660,16 @@ body {
     padding-top: 2rem;
     border-top: 1px solid rgba(0, 212, 255, 0.1);
     color: var(--text-gray);
-    font-size: 0.9rem;
 }
 
-/* ==================== MODAL ==================== */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal.active {
-    display: flex;
-}
-
-.modal-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    background: var(--card-bg);
-    border: 2px solid var(--primary-color);
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 0 50px var(--glow-color);
-}
-
-.modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 2rem;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.modal-close:hover {
-    color: var(--accent-color);
-}
-
-#modalImage {
-    max-width: 100%;
-    max-height: 70vh;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-}
-
-.modal-info {
-    text-align: center;
-}
-
-#modalTitle {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-#modalResolution {
-    color: var(--text-gray);
-    margin-bottom: 1rem;
-}
-
-/* ==================== LOADING SPINNER ==================== */
-.loading-spinner {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: white;
-    animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* ==================== RESPONSIVE DESIGN ==================== */
+/* ==================== RESPONSIVE ==================== */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--navbar-bg);
-        flex-direction: column;
-        padding: 2rem;
-        gap: 1rem;
-    }
-    
-    .nav-links.active {
-        display: flex;
-    }
-    
-    .mobile-menu-toggle {
-        display: flex;
     }
     
     .hero-title {
         font-size: 3rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.5rem;
     }
     
     .section-title {
@@ -1320,49 +677,15 @@ body {
     }
     
     .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-    
-    .hero-stats {
-        gap: 2rem;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-    }
-    
-    .gallery-grid {
         grid-template-columns: 1fr;
     }
+    
+    .stats {
+        gap: 2rem;
+    }
 }
 
-/* ==================== ANIMATIONS ==================== */
-@keyframes float {
-    0%, 100% { transform: translateY(0) translateX(0); }
-    25% { transform: translateY(-20px) translateX(10px); }
-    50% { transform: translateY(-40px) translateX(-10px); }
-    75% { transform: translateY(-20px) translateX(5px); }
-}
-
-/* ==================== UTILITY CLASSES ==================== */
+/* ==================== UTILITY ==================== */
 .hidden {
     display: none !important;
 }
@@ -1378,50 +701,54 @@ body {
 .mb-2 {
     margin-bottom: 2rem;
 }
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid rgba(0, 212, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+    margin: 0 auto 1rem;
+}
+
+.loading-text {
+    color: var(--text-light);
+    font-size: 1.2rem;
+}
     </style>
 </head>
 <body>
     <!-- Animated Background -->
     <div class="animated-bg">
         <div class="grid-overlay"></div>
-        <div class="particles" id="particles"></div>
     </div>
 
-    <!-- Auth Modal -->
-    <div class="auth-modal" id="authModal">
-        <div class="auth-content">
-            <span class="auth-close" id="authClose">&times;</span>
-            <h2 class="auth-title">Welcome to PromptAlchemy</h2>
-            
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login">Login</button>
-                <button class="auth-tab" data-tab="signup">Sign Up</button>
-            </div>
-            
-            <!-- Login Form -->
-            <form class="auth-form active" id="loginForm">
-                <input type="email" class="auth-input" placeholder="Email Address" required id="loginEmail">
-                <input type="password" class="auth-input" placeholder="Password" required id="loginPassword">
-                <button type="submit" class="auth-submit" id="loginSubmitBtn">
-                    <span id="loginBtnText">Login</span>
-                </button>
-                <button type="button" class="google-signin-btn" id="googleSignInBtn">
-                    <span>🔐</span> Sign in with Google
-                </button>
-                <div class="auth-message" id="loginMessage"></div>
-            </form>
-            
-            <!-- Signup Form -->
-            <form class="auth-form" id="signupForm">
-                <input type="text" class="auth-input" placeholder="Full Name" required id="signupName">
-                <input type="email" class="auth-input" placeholder="Email Address" required id="signupEmail">
-                <input type="password" class="auth-input" placeholder="Password (min 6 characters)" required id="signupPassword" minlength="6">
-                <input type="password" class="auth-input" placeholder="Confirm Password" required id="signupConfirm" minlength="6">
-                <button type="submit" class="auth-submit" id="signupSubmitBtn">
-                    <span id="signupBtnText">Create Account</span>
-                </button>
-                <div class="auth-message" id="signupMessage"></div>
-            </form>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text" id="loadingText">Loading...</div>
         </div>
     </div>
 
@@ -1429,96 +756,61 @@ body {
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
+                <span class="logo-icon">🎨</span>
                 <span class="logo-text">PromptAlchemy</span>
-                <span class="logo-subtitle">Wallpaper</span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="index.html" class="nav-link active">Home</a></li>
                 <li><a href="#gallery" class="nav-link">Gallery</a></li>
-                <li><a href="#categories" class="nav-link">Categories</a></li>
-                <li><a href="#admin" class="nav-link admin-link" id="uploadNavLink">Upload</a></li>
+                <li><a href="login.html" class="nav-link" id="loginLink">Login</a></li>
+                <li><a href="admin.html" class="nav-link hidden" id="adminLink">Admin</a></li>
                 <li>
-                    <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                    <button class="theme-toggle" id="themeToggle">
                         <span id="themeIcon">🌙</span>
                     </button>
                 </li>
-                <li class="user-info" id="userInfo" style="display: none;">
-                    <span class="admin-badge">ADMIN</span>
+                <li class="user-badge hidden" id="userBadge">
                     <span class="user-email" id="userEmail"></span>
-                    <button class="logout-btn" id="logoutBtn">Logout</button>
-                </li>
-                <li id="loginNavBtn">
-                    <button class="btn btn-secondary" onclick="openAuthModal()">Login</button>
+                    <button class="btn btn-danger" id="logoutBtn" style="padding: 0.5rem 1rem;">Logout</button>
                 </li>
             </ul>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="glitch" data-text="PromptAlchemy">PromptAlchemy</span>
-                <span class="hero-subtitle">Wallpaper</span>
-            </h1>
-            <p class="hero-tagline">✨ Transform Your Screen Into Art ✨</p>
-            <p class="hero-description">Immerse yourself in a curated collection of futuristic, high-quality wallpapers. From cyberpunk cityscapes to minimalist designs, discover the perfect backdrop for your digital world.</p>
-            <div class="hero-buttons">
-                <a href="#gallery" class="btn btn-primary">Explore Gallery</a>
-                <a href="#categories" class="btn btn-secondary">Browse Categories</a>
-            </div>
+    <section class="hero">
+        <h1 class="hero-title">PromptAlchemy Wallpaper</h1>
+        <p class="hero-subtitle">✨ Transform Your Screen Into Art ✨</p>
+        <p style="max-width: 700px; color: var(--text-gray); margin-bottom: 2rem;">
+            Discover a curated collection of premium wallpapers. From cyberpunk cityscapes to minimalist designs, 
+            find the perfect backdrop for your digital world.
+        </p>
+        <div class="hero-buttons">
+            <a href="#gallery" class="btn btn-primary">Explore Gallery</a>
+            <a href="login.html" class="btn btn-secondary">Upload Wallpaper</a>
         </div>
-        <div class="hero-stats">
-            <div class="stat-item">
-                <span class="stat-number" id="totalWallpapers">0</span>
-                <span class="stat-label">Wallpapers</span>
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalWallpapers">0</div>
+                <div class="stat-label">Wallpapers</div>
             </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="5">5</span>
-                <span class="stat-label">Categories</span>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Categories</div>
             </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="4">4</span>
-                <span class="stat-label">K+ Downloads</span>
+            <div class="stat-card">
+                <div class="stat-number" id="totalDownloads">0</div>
+                <div class="stat-label">Downloads</div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <h2 class="section-title">Why Choose <span class="highlight">PromptAlchemy</span></h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3 class="feature-title">Premium Quality</h3>
-                    <p class="feature-description">Every wallpaper is carefully curated and optimized for stunning visual quality across all devices.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">Lightning Fast</h3>
-                    <p class="feature-description">Cloud-powered delivery with CDN ensures instant loading and downloads from anywhere in the world.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌈</div>
-                    <h3 class="feature-title">Diverse Collection</h3>
-                    <p class="feature-description">From cyberpunk to nature, abstract to luxury - find wallpapers that match your style.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Search & Filter Section -->
+    <!-- Search & Filter -->
     <section class="search-section">
         <div class="container">
             <div class="search-container">
                 <input type="text" id="searchInput" class="search-input" placeholder="Search wallpapers...">
-                <button class="search-btn" id="searchBtn">Search</button>
+                <button class="btn btn-primary" id="searchBtn">Search</button>
             </div>
             <div class="filter-container">
                 <select id="categoryFilter" class="filter-select">
@@ -1534,119 +826,20 @@ body {
                     <option value="1920x1080">1920x1080</option>
                     <option value="2560x1440">2560x1440</option>
                     <option value="3840x2160">3840x2160 (4K)</option>
-                    <option value="mobile">Mobile</option>
                 </select>
             </div>
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <section id="categories" class="categories-section">
-        <div class="container">
-            <h2 class="section-title">Explore <span class="highlight">Categories</span></h2>
-            <div class="categories-grid">
-                <div class="category-card" data-category="cyberpunk">
-                    <div class="category-overlay">
-                        <h3 class="category-title">Cyberpunk</h3>
-                        <p class="category-count" id="count-cyberpunk">0 wallpapers</p>
-                    </div>
-                </div>
-                <div class="category-card" data-category="abstract">
-                    <div class="category-overlay">
-                        <h3 class="category-title">Abstract</h3>
-                        <p class="category-count" id="count-abstract">0 wallpapers</p>
-                    </div>
-                </div>
-                <div class="category-card" data-category="minimal">
-                    <div class="category-overlay">
-                        <h3 class="category-title">Minimal</h3>
-                        <p class="category-count" id="count-minimal">0 wallpapers</p>
-                    </div>
-                </div>
-                <div class="category-card" data-category="nature">
-                    <div class="category-overlay">
-                        <h3 class="category-title">Nature</h3>
-                        <p class="category-count" id="count-nature">0 wallpapers</p>
-                    </div>
-                </div>
-                <div class="category-card" data-category="luxury">
-                    <div class="category-overlay">
-                        <h3 class="category-title">Luxury</h3>
-                        <p class="category-count" id="count-luxury">0 wallpapers</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery-section">
+    <!-- Gallery -->
+    <section id="gallery" class="section">
         <div class="container">
             <h2 class="section-title">Featured <span class="highlight">Wallpapers</span></h2>
             <div class="gallery-grid" id="galleryGrid">
-                <!-- Wallpapers will be dynamically loaded here -->
+                <!-- Wallpapers loaded dynamically -->
             </div>
-            <div class="load-more-container">
+            <div class="text-center mt-2">
                 <button class="btn btn-primary" id="loadMoreBtn">Load More</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Admin Panel -->
-    <section id="admin" class="admin-section">
-        <div class="container">
-            <h2 class="section-title">Upload <span class="highlight">Wallpaper</span></h2>
-            <div class="admin-container">
-                <div class="login-required" id="loginRequired">
-                    <h3>🔒 Admin Access Required</h3>
-                    <p>Please login with admin credentials to upload wallpapers</p>
-                    <button class="btn btn-primary" onclick="openAuthModal()">Login / Sign Up</button>
-                </div>
-                
-                <div class="admin-panel" id="adminPanel" style="display: none;">
-                    <h3>Upload New Wallpaper</h3>
-                    <div class="upload-instructions">
-                        <strong>📋 Upload Guidelines:</strong>
-                        <ul>
-                            <li>✅ Supported formats: JPG, PNG, WebP</li>
-                            <li>⚡ Images automatically compressed for fast upload</li>
-                            <li>☁️ Stored permanently in cloud storage (Firebase)</li>
-                            <li>🌍 Accessible from all devices worldwide</li>
-                            <li>📱 Optimized for mobile and desktop viewing</li>
-                        </ul>
-                    </div>
-                    <form id="uploadForm" class="upload-form">
-                        <input type="text" id="wallpaperTitle" class="admin-input" placeholder="Wallpaper Title *" required>
-                        <select id="wallpaperCategory" class="admin-input" required>
-                            <option value="">Select Category *</option>
-                            <option value="cyberpunk">Cyberpunk</option>
-                            <option value="abstract">Abstract</option>
-                            <option value="minimal">Minimal</option>
-                            <option value="nature">Nature</option>
-                            <option value="luxury">Luxury</option>
-                        </select>
-                        <input type="text" id="wallpaperResolution" class="admin-input" placeholder="Resolution (e.g., 1920x1080) *" required>
-                        <div class="file-upload-wrapper">
-                            <label for="wallpaperFile" class="file-upload-label" id="fileLabel">
-                                📁 Click to select image file
-                            </label>
-                            <input type="file" id="wallpaperFile" accept="image/*" required>
-                            <img id="imagePreview" class="image-preview" alt="Preview">
-                        </div>
-                        
-                        <div class="upload-progress" id="uploadProgress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progressFill">0%</div>
-                            </div>
-                            <p class="progress-text" id="progressText">Preparing upload...</p>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" id="uploadBtn">
-                            <span id="uploadBtnText">🚀 Upload Wallpaper</span>
-                        </button>
-                    </form>
-                    <div class="admin-message" id="adminMessage"></div>
-                </div>
             </div>
         </div>
     </section>
@@ -1655,55 +848,309 @@ body {
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3 class="footer-title">PromptAlchemy Wallpaper</h3>
-                    <p class="footer-description">Your destination for premium futuristic wallpapers. Curated with passion, designed for perfection. Powered by Firebase cloud storage for global accessibility.</p>
+                <div>
+                    <h3 class="footer-title">PromptAlchemy</h3>
+                    <p style="color: var(--text-gray);">Premium wallpapers for your digital world. Powered by cloud technology.</p>
                 </div>
-                <div class="footer-section">
-                    <h4 class="footer-subtitle">Quick Links</h4>
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="#gallery">Gallery</a></li>
-                        <li><a href="#categories">Categories</a></li>
-                        <li><a href="#admin">Upload</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="admin.html">Admin</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4 class="footer-subtitle">Connect With Us</h4>
-                    <div class="social-links">
-                        <a href="https://instagram.com/promptalchemylab" target="_blank" class="social-link">
-                            📷 Instagram: @promptalchemylab
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-subtitle">Contact</h4>
-                    <div class="contact-info">
-                        <p>📧 Email: <a href="mailto:c7134890@gmail.com">c7134890@gmail.com</a></p>
-                        <p>💬 We'd love to hear from you!</p>
-                    </div>
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://instagram.com/promptalchemylab" target="_blank">📷 Instagram</a></li>
+                        <li><a href="mailto:c7134890@gmail.com">📧 Email</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 PromptAlchemy Wallpaper. All rights reserved. | Made with ❤️ by PromptAlchemy Lab</p>
+                <p>&copy; 2024 PromptAlchemy Wallpaper. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Modal for Wallpaper Preview -->
+    <!-- Modal -->
     <div class="modal" id="wallpaperModal">
         <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <img src="" alt="" id="modalImage">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img src="" alt="" class="modal-image" id="modalImage">
             <div class="modal-info">
-                <h3 id="modalTitle"></h3>
-                <p id="modalResolution"></p>
+                <h3 class="modal-title" id="modalTitle"></h3>
+                <p class="modal-details" id="modalDetails"></p>
                 <button class="btn btn-primary" id="modalDownloadBtn">Download</button>
             </div>
         </div>
     </div>
 
-    <!-- Main Application Script -->
-    <script src="app.js"></script>
+    <script>
+// ==================== CONFIGURATION ====================
+// Sample data for demo - Replace with Firebase in production
+let wallpapers = [
+    {
+        id: '1',
+        title: 'Neon City',
+        category: 'cyberpunk',
+        resolution: '3840x2160',
+        imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800',
+        downloads: 245
+    },
+    {
+        id: '2',
+        title: 'Abstract Flow',
+        category: 'abstract',
+        resolution: '2560x1440',
+        imageUrl: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800',
+        downloads: 189
+    },
+    {
+        id: '3',
+        title: 'Minimal Gradient',
+        category: 'minimal',
+        resolution: '1920x1080',
+        imageUrl: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=800',
+        downloads: 312
+    },
+    {
+        id: '4',
+        title: 'Mountain Vista',
+        category: 'nature',
+        resolution: '3840x2160',
+        imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+        downloads: 456
+    },
+    {
+        id: '5',
+        title: 'Gold Luxury',
+        category: 'luxury',
+        resolution: '2560x1440',
+        imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800',
+        downloads: 178
+    },
+    {
+        id: '6',
+        title: 'Cyber Grid',
+        category: 'cyberpunk',
+        resolution: '3840x2160',
+        imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
+        downloads: 289
+    }
+];
+
+let displayedCount = 6;
+let currentFilter = { category: 'all', resolution: 'all', search: '' };
+
+// ==================== THEME MANAGEMENT ====================
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const html = document.documentElement;
+
+const savedTheme = localStorage.getItem('theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+});
+
+// ==================== TOAST NOTIFICATIONS ====================
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    const icons = {
+        success: '✅',
+        error: '❌',
+        warning: '⚠️'
+    };
+    
+    toast.innerHTML = `
+        <span class="toast-icon">${icons[type]}</span>
+        <span class="toast-message">${message}</span>
+        <button class="toast-close" onclick="this.parentElement.remove()">×</button>
+    `;
+    
+    container.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 5000);
+}
+
+// ==================== LOADING OVERLAY ====================
+function showLoading(text = 'Loading...') {
+    document.getElementById('loadingOverlay').classList.remove('hidden');
+    document.getElementById('loadingText').textContent = text;
+}
+
+function hideLoading() {
+    document.getElementById('loadingOverlay').classList.add('hidden');
+}
+
+// ==================== AUTH CHECK ====================
+function checkAuth() {
+    const user = localStorage.getItem('currentUser');
+    if (user) {
+        const userData = JSON.parse(user);
+        document.getElementById('loginLink').classList.add('hidden');
+        document.getElementById('adminLink').classList.remove('hidden');
+        document.getElementById('userBadge').classList.remove('hidden');
+        document.getElementById('userEmail').textContent = userData.email;
+    }
+}
+
+// ==================== LOGOUT ====================
+document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    if (confirm('Are you sure you want to logout?')) {
+        localStorage.removeItem('currentUser');
+        showToast('Logged out successfully', 'success');
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1000);
+    }
+});
+
+// ==================== RENDER WALLPAPERS ====================
+function renderWallpapers() {
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = '';
+    
+    let filtered = wallpapers.filter(w => {
+        const catMatch = currentFilter.category === 'all' || w.category === currentFilter.category;
+        const resMatch = currentFilter.resolution === 'all' || w.resolution === currentFilter.resolution;
+        const searchMatch = currentFilter.search === '' || 
+            w.title.toLowerCase().includes(currentFilter.search.toLowerCase()) ||
+            w.category.toLowerCase().includes(currentFilter.search.toLowerCase());
+        return catMatch && resMatch && searchMatch;
+    });
+    
+    const toShow = filtered.slice(0, displayedCount);
+    
+    if (toShow.length === 0) {
+        grid.innerHTML = '<p style="text-align: center; color: var(--text-gray); grid-column: 1/-1;">No wallpapers found</p>';
+        return;
+    }
+    
+    toShow.forEach(w => {
+        const card = document.createElement('div');
+        card.className = 'wallpaper-card';
+        card.innerHTML = `
+            <img src="${w.imageUrl}" alt="${w.title}" class="wallpaper-image">
+            <div class="wallpaper-overlay">
+                <h3 class="wallpaper-title">${w.title}</h3>
+                <div class="wallpaper-info">
+                    <span>${w.category}</span>
+                    <span>${w.resolution}</span>
+                </div>
+                <div class="wallpaper-actions">
+                    <button class="btn btn-primary" onclick="downloadWallpaper('${w.id}')">Download</button>
+                </div>
+            </div>
+        `;
+        card.addEventListener('click', (e) => {
+            if (!e.target.closest('button')) {
+                openModal(w);
+            }
+        });
+        grid.appendChild(card);
+    });
+    
+    document.getElementById('loadMoreBtn').style.display = 
+        displayedCount >= filtered.length ? 'none' : 'inline-block';
+}
+
+// ==================== DOWNLOAD ====================
+function downloadWallpaper(id) {
+    const wallpaper = wallpapers.find(w => w.id === id);
+    if (!wallpaper) return;
+    
+    showLoading('Preparing download...');
+    
+    setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = wallpaper.imageUrl;
+        link.download = `${wallpaper.title.replace(/\s+/g, '-')}.jpg`;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        wallpaper.downloads++;
+        updateStats();
+        hideLoading();
+        showToast('Download started!', 'success');
+    }, 500);
+}
+
+// ==================== MODAL ====================
+function openModal(wallpaper) {
+    document.getElementById('modalImage').src = wallpaper.imageUrl;
+    document.getElementById('modalTitle').textContent = wallpaper.title;
+    document.getElementById('modalDetails').textContent = 
+        `${wallpaper.resolution} • ${wallpaper.category} • ${wallpaper.downloads} downloads`;
+    document.getElementById('modalDownloadBtn').onclick = () => downloadWallpaper(wallpaper.id);
+    document.getElementById('wallpaperModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('wallpaperModal').classList.remove('active');
+}
+
+// ==================== STATS ====================
+function updateStats() {
+    document.getElementById('totalWallpapers').textContent = wallpapers.length;
+    const totalDownloads = wallpapers.reduce((sum, w) => sum + w.downloads, 0);
+    document.getElementById('totalDownloads').textContent = totalDownloads;
+}
+
+// ==================== EVENT LISTENERS ====================
+document.getElementById('searchBtn').addEventListener('click', () => {
+    currentFilter.search = document.getElementById('searchInput').value;
+    displayedCount = 6;
+    renderWallpapers();
+});
+
+document.getElementById('searchInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        currentFilter.search = e.target.value;
+        displayedCount = 6;
+        renderWallpapers();
+    }
+});
+
+document.getElementById('categoryFilter').addEventListener('change', (e) => {
+    currentFilter.category = e.target.value;
+    displayedCount = 6;
+    renderWallpapers();
+});
+
+document.getElementById('resolutionFilter').addEventListener('change', (e) => {
+    currentFilter.resolution = e.target.value;
+    displayedCount = 6;
+    renderWallpapers();
+});
+
+document.getElementById('loadMoreBtn').addEventListener('click', () => {
+    displayedCount += 6;
+    renderWallpapers();
+});
+
+// ==================== INITIALIZE ====================
+document.addEventListener('DOMContentLoaded', () => {
+    checkAuth();
+    renderWallpapers();
+    updateStats();
+});
+    </script>
 </body>
 </html>
