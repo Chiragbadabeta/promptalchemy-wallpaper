@@ -575,34 +575,223 @@ body {
     margin-bottom: 1.5rem;
 }
 
-.file-upload {
-    border: 2px dashed rgba(0, 212, 255, 0.3);
+/* ==================== ADVANCED UPLOAD SECTION ==================== */
+.upload-tips {
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.upload-tips h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.upload-tips ul {
+    margin-left: 1.5rem;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.upload-tips li {
+    margin-bottom: 0.3rem;
+}
+
+.drag-drop-area {
+    border: 3px dashed rgba(0, 212, 255, 0.3);
+    border-radius: 12px;
+    padding: 3rem 2rem;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    background: rgba(0, 212, 255, 0.02);
+    position: relative;
 }
 
-.file-upload:hover {
+.drag-drop-area:hover {
     border-color: var(--primary);
-    background: rgba(0, 212, 255, 0.05);
+    background: rgba(0, 212, 255, 0.08);
+    transform: scale(1.02);
 }
 
-.file-upload.has-file {
+.drag-drop-area.dragover {
+    border-color: var(--success);
+    background: rgba(0, 255, 136, 0.1);
+    border-style: solid;
+}
+
+.drag-drop-area.has-files {
     border-color: var(--primary);
+    border-style: solid;
+}
+
+.upload-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.upload-text {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.upload-subtext {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.file-input-hidden {
+    display: none;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    display: none;
+}
+
+.preview-grid.show {
+    display: grid;
+}
+
+.preview-item {
+    position: relative;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(10, 10, 15, 0.8);
 }
 
 .preview-image {
-    max-width: 100%;
-    max-height: 300px;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.preview-info {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-gray);
+}
+
+.preview-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3rem;
+}
+
+.preview-size {
+    color: var(--primary);
+}
+
+.preview-remove {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: var(--error);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.preview-remove:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--error);
+}
+
+.file-info-section {
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
     border-radius: 8px;
+    padding: 1rem;
     margin-top: 1rem;
     display: none;
 }
 
-.preview-image.show {
+.file-info-section.show {
     display: block;
+}
+
+.file-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.file-info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: rgba(10, 10, 15, 0.5);
+    border-radius: 4px;
+}
+
+.file-info-label {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.file-info-value {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.quick-action-btn {
+    padding: 0.6rem 1.2rem;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: var(--primary);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.quick-action-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--primary);
+}
+
+.auto-detect-badge {
+    display: inline-block;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: var(--success);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
 }
 
 .progress-bar {
@@ -616,6 +805,10 @@ body {
     display: none;
 }
 
+.progress-bar.show {
+    display: block;
+}
+
 .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -626,6 +819,60 @@ body {
     justify-content: center;
     font-weight: 600;
     color: white;
+}
+
+.upload-queue {
+    margin-top: 1rem;
+    display: none;
+}
+
+.upload-queue.show {
+    display: block;
+}
+
+.queue-item {
+    background: rgba(10, 10, 15, 0.8);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.queue-icon {
+    font-size: 2rem;
+}
+
+.queue-info {
+    flex: 1;
+}
+
+.queue-name {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.queue-status {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.queue-progress {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 212, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.queue-progress-fill {
+    height: 100%;
+    background: var(--primary);
+    width: 0%;
+    transition: width 0.3s ease;
 }
 
 /* ==================== SPINNER ==================== */
@@ -761,6 +1008,7 @@ body {
     .section-title { font-size: 2rem; }
     .gallery-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
+    .preview-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
 }
     </style>
 </head>
@@ -940,40 +1188,82 @@ body {
             </div>
 
             <div class="upload-section">
-                <h2 class="section-subtitle">Upload New Wallpaper</h2>
+                <h2 class="section-subtitle">🚀 Advanced Upload Center</h2>
+                
+                <div class="upload-tips">
+                    <h4>💡 Quick Tips:</h4>
+                    <ul>
+                        <li>✅ Drag & drop multiple images at once</li>
+                        <li>✅ Resolution auto-detected from image</li>
+                        <li>✅ Supports JPG, PNG, WebP (max 10MB each)</li>
+                        <li>✅ Preview before uploading</li>
+                        <li>✅ Batch upload multiple wallpapers</li>
+                    </ul>
+                </div>
+
                 <form onsubmit="handleUpload(event)">
-                    <div class="form-group">
-                        <label class="form-label">Wallpaper Title</label>
-                        <input type="text" class="form-input" id="wallpaperTitle" required placeholder="Enter title">
+                    <!-- Drag & Drop Area -->
+                    <div class="drag-drop-area" id="dragDropArea">
+                        <div class="upload-icon">📁</div>
+                        <div class="upload-text">Drag & Drop Images Here</div>
+                        <div class="upload-subtext">or click to browse files</div>
+                        <input type="file" id="wallpaperFiles" class="file-input-hidden" accept="image/*" multiple>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Category</label>
-                        <select class="form-input" id="wallpaperCategory" required>
-                            <option value="">Select Category</option>
-                            <option value="cyberpunk">Cyberpunk</option>
-                            <option value="abstract">Abstract</option>
-                            <option value="minimal">Minimal</option>
-                            <option value="nature">Nature</option>
-                            <option value="luxury">Luxury</option>
-                        </select>
+
+                    <!-- Preview Grid -->
+                    <div class="preview-grid" id="previewGrid"></div>
+
+                    <!-- File Info Section -->
+                    <div class="file-info-section" id="fileInfoSection">
+                        <div class="file-info-grid" id="fileInfoGrid"></div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Resolution</label>
-                        <input type="text" class="form-input" id="wallpaperResolution" required placeholder="e.g., 1920x1080">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Image File</label>
-                        <div class="file-upload" id="fileUpload" onclick="document.getElementById('wallpaperFile').click()">
-                            <p>📁 Click to select image</p>
-                            <input type="file" id="wallpaperFile" accept="image/*" required style="display: none;" onchange="previewFile()">
+
+                    <!-- Form Fields -->
+                    <div id="formFields" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">
+                                Wallpaper Title
+                                <span class="auto-detect-badge" id="titleBadge" style="display: none;">Auto-filled</span>
+                            </label>
+                            <input type="text" class="form-input" id="wallpaperTitle" required placeholder="Enter title">
                         </div>
-                        <img id="previewImage" class="preview-image" alt="Preview">
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select class="form-input" id="wallpaperCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="cyberpunk">Cyberpunk</option>
+                                <option value="abstract">Abstract</option>
+                                <option value="minimal">Minimal</option>
+                                <option value="nature">Nature</option>
+                                <option value="luxury">Luxury</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                Resolution
+                                <span class="auto-detect-badge" id="resolutionBadge" style="display: none;">Auto-detected</span>
+                            </label>
+                            <input type="text" class="form-input" id="wallpaperResolution" required placeholder="e.g., 1920x1080" readonly>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="quick-actions">
+                            <button type="button" class="quick-action-btn" onclick="clearAllFiles()">🗑️ Clear All</button>
+                            <button type="button" class="quick-action-btn" onclick="addMoreFiles()">➕ Add More</button>
+                        </div>
                     </div>
+
+                    <!-- Progress Bar -->
                     <div class="progress-bar" id="progressBar">
                         <div class="progress-fill" id="progressFill">0%</div>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="uploadBtn" style="width: 100%;">
-                        <span id="uploadBtnText">Upload Wallpaper</span>
+
+                    <!-- Upload Queue -->
+                    <div class="upload-queue" id="uploadQueue"></div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary" id="uploadBtn" style="width: 100%; margin-top: 1rem; display: none;">
+                        <span id="uploadBtnText">🚀 Upload Wallpaper(s)</span>
                     </button>
                     <div class="message" id="uploadMessage"></div>
                 </form>
@@ -1054,6 +1344,7 @@ let wallpapers = [
 
 let displayedCount = 6;
 let currentFilter = { category: 'all', resolution: 'all', search: '' };
+let selectedFiles = [];
 
 // ==================== THEME ====================
 const themeToggle = document.getElementById('themeToggle');
@@ -1220,87 +1511,268 @@ function logout() {
     }
 }
 
-// ==================== UPLOAD ====================
-function previewFile() {
-    const file = document.getElementById('wallpaperFile').files[0];
-    if (file) {
-        document.getElementById('fileUpload').classList.add('has-file');
-        document.querySelector('#fileUpload p').textContent = `✅ ${file.name}`;
+// ==================== ADVANCED UPLOAD ====================
+const dragDropArea = document.getElementById('dragDropArea');
+const fileInput = document.getElementById('wallpaperFiles');
+const previewGrid = document.getElementById('previewGrid');
+const fileInfoSection = document.getElementById('fileInfoSection');
+const formFields = document.getElementById('formFields');
+const uploadBtn = document.getElementById('uploadBtn');
+
+// Click to browse
+dragDropArea.addEventListener('click', () => fileInput.click());
+
+// Drag & Drop events
+dragDropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dragDropArea.classList.add('dragover');
+});
+
+dragDropArea.addEventListener('dragleave', () => {
+    dragDropArea.classList.remove('dragover');
+});
+
+dragDropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dragDropArea.classList.remove('dragover');
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    handleFiles(files);
+});
+
+// File input change
+fileInput.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files);
+    handleFiles(files);
+});
+
+function handleFiles(files) {
+    if (files.length === 0) return;
+    
+    // Validate files
+    const validFiles = files.filter(f => {
+        if (!f.type.startsWith('image/')) {
+            showToast(`${f.name} is not an image`, 'error');
+            return false;
+        }
+        if (f.size > 10 * 1024 * 1024) {
+            showToast(`${f.name} is too large (max 10MB)`, 'error');
+            return false;
+        }
+        return true;
+    });
+    
+    if (validFiles.length === 0) return;
+    
+    selectedFiles = validFiles;
+    dragDropArea.classList.add('has-files');
+    displayPreviews();
+    showFileInfo();
+    formFields.style.display = 'block';
+    uploadBtn.style.display = 'block';
+    
+    // Auto-fill first file info
+    if (validFiles.length === 1) {
+        autoFillInfo(validFiles[0]);
+    }
+    
+    showToast(`${validFiles.length} file(s) selected`, 'success');
+}
+
+function displayPreviews() {
+    previewGrid.innerHTML = '';
+    previewGrid.classList.add('show');
+    
+    selectedFiles.forEach((file, index) => {
         const reader = new FileReader();
         reader.onload = (e) => {
-            const preview = document.getElementById('previewImage');
-            preview.src = e.target.result;
-            preview.classList.add('show');
+            const img = new Image();
+            img.onload = () => {
+                const item = document.createElement('div');
+                item.className = 'preview-item';
+                item.innerHTML = `
+                    <img src="${e.target.result}" class="preview-image" alt="${file.name}">
+                    <div class="preview-info">
+                        <div class="preview-name">${file.name}</div>
+                        <div class="preview-size">${(file.size / 1024).toFixed(1)} KB</div>
+                        <div class="preview-size">${img.width}x${img.height}</div>
+                    </div>
+                    <button class="preview-remove" onclick="removeFile(${index})" type="button">×</button>
+                `;
+                previewGrid.appendChild(item);
+            };
+            img.src = e.target.result;
         };
         reader.readAsDataURL(file);
+    });
+}
+
+function showFileInfo() {
+    fileInfoSection.classList.add('show');
+    const totalSize = selectedFiles.reduce((sum, f) => sum + f.size, 0);
+    document.getElementById('fileInfoGrid').innerHTML = `
+        <div class="file-info-item">
+            <span class="file-info-label">Total Files:</span>
+            <span class="file-info-value">${selectedFiles.length}</span>
+        </div>
+        <div class="file-info-item">
+            <span class="file-info-label">Total Size:</span>
+            <span class="file-info-value">${(totalSize / 1024 / 1024).toFixed(2)} MB</span>
+        </div>
+        <div class="file-info-item">
+            <span class="file-info-label">Status:</span>
+            <span class="file-info-value">Ready to Upload</span>
+        </div>
+    `;
+}
+
+function autoFillInfo(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+            // Auto-fill resolution
+            document.getElementById('wallpaperResolution').value = `${img.width}x${img.height}`;
+            document.getElementById('resolutionBadge').style.display = 'inline-block';
+            
+            // Auto-fill title from filename
+            const title = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+            document.getElementById('wallpaperTitle').value = title;
+            document.getElementById('titleBadge').style.display = 'inline-block';
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    if (selectedFiles.length === 0) {
+        clearAllFiles();
+    } else {
+        displayPreviews();
+        showFileInfo();
     }
+    showToast('File removed', 'success');
+}
+
+function clearAllFiles() {
+    selectedFiles = [];
+    previewGrid.innerHTML = '';
+    previewGrid.classList.remove('show');
+    fileInfoSection.classList.remove('show');
+    formFields.style.display = 'none';
+    uploadBtn.style.display = 'none';
+    dragDropArea.classList.remove('has-files');
+    fileInput.value = '';
+    document.getElementById('wallpaperTitle').value = '';
+    document.getElementById('wallpaperCategory').value = '';
+    document.getElementById('wallpaperResolution').value = '';
+    showToast('All files cleared', 'success');
+}
+
+function addMoreFiles() {
+    fileInput.click();
 }
 
 async function handleUpload(e) {
     e.preventDefault();
+    
+    if (selectedFiles.length === 0) {
+        showToast('Please select files first', 'error');
+        return;
+    }
+    
     const title = document.getElementById('wallpaperTitle').value;
     const category = document.getElementById('wallpaperCategory').value;
     const resolution = document.getElementById('wallpaperResolution').value;
-    const file = document.getElementById('wallpaperFile').files[0];
     
     const btn = document.getElementById('uploadBtn');
     const btnText = document.getElementById('uploadBtnText');
     const progressBar = document.getElementById('progressBar');
     const progressFill = document.getElementById('progressFill');
     const message = document.getElementById('uploadMessage');
+    const uploadQueue = document.getElementById('uploadQueue');
     
     btn.disabled = true;
     btnText.innerHTML = '<span class="spinner"></span> Uploading...';
-    progressBar.style.display = 'block';
+    progressBar.classList.add('show');
+    uploadQueue.classList.add('show');
     message.style.display = 'none';
     
     try {
-        for (let i = 0; i <= 100; i += 10) {
-            await new Promise(resolve => setTimeout(resolve, 100));
-            progressFill.style.width = i + '%';
-            progressFill.textContent = i + '%';
+        const stored = JSON.parse(localStorage.getItem('wallpapers') || '[]');
+        
+        for (let i = 0; i < selectedFiles.length; i++) {
+            const file = selectedFiles[i];
+            const progress = ((i + 1) / selectedFiles.length) * 100;
+            
+            // Update queue
+            uploadQueue.innerHTML = `
+                <div class="queue-item">
+                    <div class="queue-icon">📤</div>
+                    <div class="queue-info">
+                        <div class="queue-name">${file.name}</div>
+                        <div class="queue-status">Uploading ${i + 1} of ${selectedFiles.length}...</div>
+                        <div class="queue-progress">
+                            <div class="queue-progress-fill" style="width: ${progress}%"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Simulate upload
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Read file
+            const reader = new FileReader();
+            await new Promise((resolve) => {
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        stored.unshift({
+                            id: Date.now().toString() + i,
+                            title: selectedFiles.length === 1 ? title : `${title} ${i + 1}`,
+                            category,
+                            resolution: `${img.width}x${img.height}`,
+                            imageUrl: e.target.result,
+                            downloads: 0
+                        });
+                        resolve();
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            progressFill.style.width = progress + '%';
+            progressFill.textContent = Math.round(progress) + '%';
         }
         
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const stored = JSON.parse(localStorage.getItem('wallpapers') || '[]');
-            stored.unshift({
-                id: Date.now().toString(),
-                title,
-                category,
-                resolution,
-                imageUrl: e.target.result,
-                downloads: 0
-            });
-            localStorage.setItem('wallpapers', JSON.stringify(stored));
-            wallpapers = [...stored, ...wallpapers.filter(w => parseInt(w.id) < 100)];
-            
-            message.textContent = '✅ Uploaded successfully!';
-            message.className = 'message success';
-            message.style.display = 'block';
-            
-            document.querySelector('#adminPage form').reset();
-            document.getElementById('fileUpload').classList.remove('has-file');
-            document.querySelector('#fileUpload p').textContent = '📁 Click to select image';
-            document.getElementById('previewImage').classList.remove('show');
-            
-            renderGallery();
-            renderAdminGallery();
-            updateStats();
-            
-            setTimeout(() => {
-                progressBar.style.display = 'none';
-                progressFill.style.width = '0%';
-            }, 2000);
-        };
-        reader.readAsDataURL(file);
+        localStorage.setItem('wallpapers', JSON.stringify(stored));
+        wallpapers = [...stored, ...wallpapers.filter(w => parseInt(w.id) < 100)];
+        
+        message.textContent = `✅ ${selectedFiles.length} wallpaper(s) uploaded successfully!`;
+        message.className = 'message success';
+        message.style.display = 'block';
+        
+        clearAllFiles();
+        renderGallery();
+        renderAdminGallery();
+        updateStats();
+        
+        setTimeout(() => {
+            progressBar.classList.remove('show');
+            uploadQueue.classList.remove('show');
+            progressFill.style.width = '0%';
+        }, 2000);
+        
     } catch (error) {
         message.textContent = `❌ ${error.message}`;
         message.className = 'message error';
         message.style.display = 'block';
     } finally {
         btn.disabled = false;
-        btnText.textContent = 'Upload Wallpaper';
+        btnText.textContent = '🚀 Upload Wallpaper(s)';
     }
 }
 
